@@ -13,11 +13,14 @@ import javax.swing.UIManager.*;
 import javax.swing.border.TitledBorder;
 
 /**
+ * This class holds the main window and its components. Allows the user to enter a player name and realm
+ * for the game World of Warcraft to retrieve and display some interesting facts about their character.
  * Created by Jacke on 2014-04-29.
  */
 public class MainFrame{
     public MainFrame(){
     }
+    // Use Nimbus and default UIManager
     public static void main(String[] args){
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -38,7 +41,7 @@ public class MainFrame{
         final JButton addPlayerButton = new JButton("Add Player");
         final JTextField textFieldPlayer = new JTextField(10);
         final JTextField textFieldRealm = new JTextField(10);
-        final JLabel playerTag = new JLabel("Player:");
+        final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
 
         // Add a scroll pane
@@ -47,7 +50,7 @@ public class MainFrame{
         scrollPane.setPreferredSize(new Dimension(500, 400));
 
         // Add components to panels
-        topPanel.add(playerTag);
+        topPanel.add(characterTag);
         topPanel.add(textFieldPlayer);
         topPanel.add(realmTag);
         topPanel.add(textFieldRealm);

@@ -35,13 +35,13 @@ public class PlayerProfile extends JPanel{
         );
         add(backButton);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createTitledBorder(null, "Player information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
     }
-    public JSONObject getURL(String player, String realm) {
-        String playerName = player;
+    public JSONObject getURL(String character, String realm) {
+        String characterName = character;
         String realmName = realm.replaceAll(" ", "%20");
         try {
-            URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + playerName + "?fields=items,professions");
+            URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + characterName + "?fields=items,professions");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(profile.openStream()));
 
@@ -57,17 +57,17 @@ public class PlayerProfile extends JPanel{
         }
         return object;
     }
-    public void getPlayerName(String player, String realm) {
+    public void getPlayerName(String character, String realm) {
         try {
-            JSONObject obj = getURL(player, realm);
+            JSONObject obj = getURL(character, realm);
                 add(new JLabel("Player name: " + obj.get("name").toString()));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void getProfessions(String player, String realm) {
+    public void getProfessions(String character, String realm) {
         try {
-            JSONObject obj = getURL(player, realm);
+            JSONObject obj = getURL(character, realm);
             if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0){
                 add(new JLabel("Professions: No professions"));
             }else if(obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)){
@@ -84,9 +84,9 @@ public class PlayerProfile extends JPanel{
 
         }
     }
-    public void getLevel(String player, String realm) {
+    public void getLevel(String character, String realm) {
         try {
-            JSONObject obj = getURL(player, realm);
+            JSONObject obj = getURL(character, realm);
             add(new JLabel("Level: " + obj.get("level").toString()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,9 +95,9 @@ public class PlayerProfile extends JPanel{
     /**
      * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
      */
-    public void getClass(String player, String realm){
+    public void getClass(String character, String realm){
         try{
-        JSONObject obj = getURL(player, realm);
+        JSONObject obj = getURL(character, realm);
             HashMap classMap = new HashMap();
             classMap.put(1, "Warrior");
             classMap.put(2, "Paladin");
@@ -116,9 +116,9 @@ public class PlayerProfile extends JPanel{
     }
     }
 
-    public void getItemLevel(String player, String realm) {
+    public void getItemLevel(String character, String realm) {
         try {
-            JSONObject obj = getURL(player, realm);
+            JSONObject obj = getURL(character, realm);
             add(new JLabel("Item level: " + obj.getJSONObject("items").getJSONObject("trinket2").get("itemLevel").toString()));
         } catch (Exception e) {
             e.printStackTrace();
