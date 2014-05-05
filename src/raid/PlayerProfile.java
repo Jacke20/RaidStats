@@ -1,0 +1,128 @@
+package raid;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.*;
+import java.io.*;
+import java.util.HashMap;
+
+
+import org.json.*;
+
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
+public class PlayerProfile extends JPanel{
+    private JSONObject object;
+    private int loadTime;
+    public PlayerProfile(final JScrollPane scrollPane, final JPanel topPanel){
+
+        JButton backButton = new JButton("\u22b2Back");
+        backButton.addActionListener(new ActionListener() {
+                                         @Override
+                                         public void actionPerformed(ActionEvent e) {
+                                             removeAll();
+                                             setBorder(null);
+                                             setLayout(new BorderLayout());
+                                             add(topPanel, BorderLayout.NORTH);
+                                             add(scrollPane, BorderLayout.CENTER);
+                                             validate();
+                                             repaint();
+                                         }
+                                     }
+        );
+        add(backButton);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createTitledBorder(null, "Player information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+    }
+    public JSONObject getURL(String player, String realm) {
+        String playerName = player;
+        String realmName = realm.replaceAll(" ", "%20");
+        try {
+            URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + playerName + "?fields=items,professions");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(profile.openStream()));
+
+            String inputLine;
+            String json = "";
+            while ((inputLine = in.readLine()) != null) {
+                json = inputLine + json;
+            }
+            in.close();
+            object = new JSONObject(json);
+
+        } catch (Exception e) {
+        }
+        return object;
+    }
+    public void getPlayerName(String player, String realm) {
+        try {
+            JSONObject obj = getURL(player, realm);
+                add(new JLabel("Player name: " + obj.get("name").toString()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void getProfessions(String player, String realm) {
+        try {
+            JSONObject obj = getURL(player, realm);
+            if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0){
+                add(new JLabel("Professions: No professions"));
+            }else if(obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)){
+                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name").toString() +
+                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank").toString() + "] "));
+            }else {
+                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name").toString() +
+                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank").toString() + "] " + ", "
+                        + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name").toString() + " [" +
+                        obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank").toString() + "]"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    public void getLevel(String player, String realm) {
+        try {
+            JSONObject obj = getURL(player, realm);
+            add(new JLabel("Level: " + obj.get("level").toString()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
+     */
+    public void getClass(String player, String realm){
+        try{
+        JSONObject obj = getURL(player, realm);
+            HashMap classMap = new HashMap();
+            classMap.put(1, "Warrior");
+            classMap.put(2, "Paladin");
+            classMap.put(3, "Hunter");
+            classMap.put(4, "Rogue");
+            classMap.put(5, "Priest");
+            classMap.put(6, "Death Knight");
+            classMap.put(7, "Shaman");
+            classMap.put(8, "Mage");
+            classMap.put(9, "Warlock");
+            classMap.put(10, "Monk");
+            classMap.put(11, "Druid");
+        add(new JLabel("Class: " + classMap.get(obj.get("class"))));
+        } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+
+    public void getItemLevel(String player, String realm) {
+        try {
+            JSONObject obj = getURL(player, realm);
+            add(new JLabel("Item level: " + obj.getJSONObject("items").getJSONObject("trinket2").get("itemLevel").toString()));
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+}
