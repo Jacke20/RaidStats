@@ -36,7 +36,7 @@ public class MainFrame{
         final JPanel listPanel = new ListPanel();
 
         // Create components
-        final JButton addPlayerButton = new JButton("Add Player");
+        final JButton addPlayerButton = new JButton("Add character");
         final JTextField textFieldPlayer = new JTextField(10);
         final JTextField textFieldRealm = new JTextField(10);
         final JLabel characterTag = new JLabel("Character:");
