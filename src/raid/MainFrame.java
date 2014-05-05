@@ -89,16 +89,19 @@ public class MainFrame{
         JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
 
 
-                if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) { //TODO: check for duplicates
+                if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) { 
                     // Create button with players name and modify text-icon relation.
                 	String name = textFieldPlayer.getText().toLowerCase();
-                	players.add(name);
+                	final String nameDummy = name;
+                	players.add(nameDummy);
                 	name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final JButton button = new JButton(name);
+                    final JButton rButton = new JButton("X");
                     button.setToolTipText("Click to open profile!");
                     button.setVerticalTextPosition(SwingConstants.TOP);
                     button.setHorizontalTextPosition(SwingConstants.CENTER);
                     button.setIconTextGap(0);
+                    button.add(rButton);
 
                     // Retrieve player and realm values from text fields.
                     final String player = textFieldPlayer.getText();
@@ -179,6 +182,18 @@ public class MainFrame{
                             button.setBackground(defaultColor);
                         }
                     });
+                    rButton.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							players.remove(nameDummy);
+							listPanel.remove(button);
+							listPanel.validate();
+		                    listPanel.repaint();
+						}
+					});
+						
+					
                     listPanel.add(button);
                     listPanel.validate();
                     listPanel.repaint();
