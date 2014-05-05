@@ -14,9 +14,10 @@ import org.json.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-public class PlayerProfile extends JPanel{
+public class PlayerProfile extends JPanel {
     private JSONObject object;
-    public PlayerProfile(final JScrollPane scrollPane, final JPanel topPanel){
+
+    public PlayerProfile(final JScrollPane scrollPane, final JPanel topPanel) {
 
         JButton backButton = new JButton("\u22b2Back");
         backButton.addActionListener(new ActionListener() {
@@ -36,6 +37,7 @@ public class PlayerProfile extends JPanel{
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
     }
+
     public JSONObject getURL(String character, String realm) {
         String characterName = character;
         String realmName = realm.replaceAll(" ", "%20");
@@ -56,23 +58,25 @@ public class PlayerProfile extends JPanel{
         }
         return object;
     }
+
     public void getPlayerName(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
-                add(new JLabel("Player name: " + obj.get("name")));
+            add(new JLabel("Player name: " + obj.get("name")));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void getProfessions(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
-            if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0){
+            if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0) {
                 add(new JLabel("Professions: No professions"));
-            }else if(obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)){
+            } else if (obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)) {
                 add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
                         " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] "));
-            }else {
+            } else {
                 add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
                         " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] " + ", "
                         + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name") + " [" +
@@ -83,6 +87,7 @@ public class PlayerProfile extends JPanel{
 
         }
     }
+
     public void getLevel(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
@@ -91,12 +96,13 @@ public class PlayerProfile extends JPanel{
             e.printStackTrace();
         }
     }
+
     /**
      * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
      */
-    public void getClass(String character, String realm){
-        try{
-        JSONObject obj = getURL(character, realm);
+    public void getClass(String character, String realm) {
+        try {
+            JSONObject obj = getURL(character, realm);
             HashMap classMap = new HashMap();
             classMap.put(1, "Warrior");
             classMap.put(2, "Paladin");
@@ -109,21 +115,19 @@ public class PlayerProfile extends JPanel{
             classMap.put(9, "Warlock");
             classMap.put(10, "Monk");
             classMap.put(11, "Druid");
-        add(new JLabel("Class: " + classMap.get(obj.get("class"))));
+            add(new JLabel("Class: " + classMap.get(obj.get("class"))));
         } catch (Exception e) {
-        e.printStackTrace();
-    }
+            e.printStackTrace();
+        }
     }
 
     public void getItemLevel(String character, String realm) {
         try {
-        	JSONObject obj = getURL(character, realm); 
-        	JSONObject items = obj.getJSONObject("items"); 
-        	
-        	add(new JLabel("Item level: " + items.get("averageItemLevel").toString() + " (" + items.get("averageItemLevelEquipped") + " equipped" ); } 
+            JSONObject obj = getURL(character, realm);
+            JSONObject items = obj.getJSONObject("items");
+            add(new JLabel("Item level: " + items.get("averageItemLevel") + " (" + items.get("averageItemLevelEquipped") + " equipped" + ")"));
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 }
