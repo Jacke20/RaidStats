@@ -183,7 +183,6 @@ public class MainFrame{
                             button.setBackground(defaultColor);
                         }
                     });
-<<<<<<< HEAD
                     rButton.addActionListener(new ActionListener() {
 						
 						@Override
@@ -199,8 +198,6 @@ public class MainFrame{
                     listPanel.add(button);
                     listPanel.validate();
                     listPanel.repaint();
-=======
->>>>>>> 703fbe94e6b7a248e89b41c758f1aeece8ad4d16
 
                     JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
                     button.addActionListener(new ActionListener() {
