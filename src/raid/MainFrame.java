@@ -79,14 +79,20 @@ public class MainFrame{
 
         // Set addPlayerButton as the default button to listen to enter.
         frame.getRootPane().setDefaultButton(addPlayerButton);
+
+        // Add a popupmenu to allow for removal of profile buttons.
+        final JPopupMenu popupMenu = new JPopupMenu();
+        final JMenuItem item = new JMenuItem("Remove");
+        popupMenu.add(item);
+
         // Implement actions.
         addPlayerButton.addActionListener(new ActionListener() {
 
 
 			@Override
             public void actionPerformed(ActionEvent e) {
-        final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
-        JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
+                final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
+                JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
 
 
                 if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) { //TODO: check for duplicates
@@ -108,74 +114,88 @@ public class MainFrame{
                     // Using default class colours from: http://www.wowwiki.com/Class_colors
                     try {
                         String playerClass = obj.get("class").toString();
-                        switch (Integer.parseInt(playerClass)){
-                            case 1: button.setIcon(new ImageIcon("images/warrior.png"));
+                        switch (Integer.parseInt(playerClass)) {
+                            case 1:
+                                button.setIcon(new ImageIcon("images/warrior.png"));
                                 float[] colorWarrior = Color.RGBtoHSB(199, 156, 110, null);
                                 button.setBackground(Color.getHSBColor(colorWarrior[0], colorWarrior[1], colorWarrior[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 2: button.setIcon(new ImageIcon("images/paladin.png"));
+                            case 2:
+                                button.setIcon(new ImageIcon("images/paladin.png"));
                                 float[] colorPaladin = Color.RGBtoHSB(245, 140, 186, null);
                                 button.setBackground(Color.getHSBColor(colorPaladin[0], colorPaladin[1], colorPaladin[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 3: button.setIcon(new ImageIcon("images/hunter.png"));
+                            case 3:
+                                button.setIcon(new ImageIcon("images/hunter.png"));
                                 float[] colorHunter = Color.RGBtoHSB(171, 212, 115, null);
                                 button.setBackground(Color.getHSBColor(colorHunter[0], colorHunter[1], colorHunter[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 4: button.setIcon(new ImageIcon("images/rogue.png"));
+                            case 4:
+                                button.setIcon(new ImageIcon("images/rogue.png"));
                                 float[] colorRogue = Color.RGBtoHSB(255, 145, 105, null);
                                 button.setBackground(Color.getHSBColor(colorRogue[0], colorRogue[1], colorRogue[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 5: button.setIcon(new ImageIcon("images/priest.png"));
+                            case 5:
+                                button.setIcon(new ImageIcon("images/priest.png"));
                                 float[] colorPriest = Color.RGBtoHSB(255, 255, 255, null);
                                 button.setBackground(Color.getHSBColor(colorPriest[0], colorPriest[1], colorPriest[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 6: button.setIcon(new ImageIcon("images/deathknight.png"));
+                            case 6:
+                                button.setIcon(new ImageIcon("images/deathknight.png"));
                                 float[] colorDeathKnight = Color.RGBtoHSB(196, 30, 59, null);
                                 button.setBackground(Color.getHSBColor(colorDeathKnight[0], colorDeathKnight[1], colorDeathKnight[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 7: button.setIcon(new ImageIcon("images/shaman.png"));
+                            case 7:
+                                button.setIcon(new ImageIcon("images/shaman.png"));
                                 float[] colorShaman = Color.RGBtoHSB(0, 112, 222, null);
                                 button.setBackground(Color.getHSBColor(colorShaman[0], colorShaman[1], colorShaman[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 8: button.setIcon(new ImageIcon("images/mage.png"));
+                            case 8:
+                                button.setIcon(new ImageIcon("images/mage.png"));
                                 float[] colorMage = Color.RGBtoHSB(105, 204, 240, null);
                                 button.setBackground(Color.getHSBColor(colorMage[0], colorMage[1], colorMage[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 9: button.setIcon(new ImageIcon("images/warlock.png"));
+                            case 9:
+                                button.setIcon(new ImageIcon("images/warlock.png"));
                                 float[] colorWarlock = Color.RGBtoHSB(148, 130, 201, null);
                                 button.setBackground(Color.getHSBColor(colorWarlock[0], colorWarlock[1], colorWarlock[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 10: button.setIcon(new ImageIcon("images/monk.png"));
+                            case 10:
+                                button.setIcon(new ImageIcon("images/monk.png"));
                                 float[] colorMonk = Color.RGBtoHSB(0, 255, 150, null);
                                 button.setBackground(Color.getHSBColor(colorMonk[0], colorMonk[1], colorMonk[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
-                            case 11: button.setIcon(new ImageIcon("images/druid.png"));
+                            case 11:
+                                button.setIcon(new ImageIcon("images/druid.png"));
                                 float[] colorDruid = Color.RGBtoHSB(255, 125, 10, null);
                                 button.setBackground(Color.getHSBColor(colorDruid[0], colorDruid[1], colorDruid[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 400, 10, true));
+                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                         }
-                    }catch (Exception e1){
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                     final Color defaultColor = button.getBackground();
                     final Color highlightColor = button.getBackground().darker();
+
+                    // Set mouselisteners for the newly created button.
                     button.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseEntered(MouseEvent e) {
                             button.setBackground(highlightColor);
                         }
-                        public void mouseExited(MouseEvent e){
+
+                        public void mouseExited(MouseEvent e) {
                             button.setBackground(defaultColor);
                         }
                     });
