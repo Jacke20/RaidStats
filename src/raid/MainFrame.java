@@ -1,14 +1,30 @@
 package raid;
 
-import org.json.JSONObject;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.UIManager.*;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
+import org.json.JSONObject;
 
 /**
  * This class holds the main window and its components. Allows the user to enter a player name and realm
@@ -16,6 +32,8 @@ import javax.swing.UIManager.*;
  * Created by Jacke on 2014-04-29.
  */
 public class MainFrame{
+	private static ArrayList<String> players = new ArrayList<String>();
+	
     public MainFrame(){
     }
     // Use Nimbus and default UIManager
@@ -64,17 +82,19 @@ public class MainFrame{
         // Implement actions.
         addPlayerButton.addActionListener(new ActionListener() {
 
-            @Override
+
+			@Override
             public void actionPerformed(ActionEvent e) {
         final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
         JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
 
 
-                if (!textFieldPlayer.getText().equals("") && obj != null) {
+                if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) { //TODO: check for duplicates
                     // Create button with players name and modify text-icon relation.
-                    Character firstChar = textFieldPlayer.getText().charAt(0);
-                    char c = Character.toUpperCase(firstChar);
-                    final JButton button = new JButton(c + textFieldPlayer.getText().substring(1, textFieldPlayer.getText().length()));
+                	String name = textFieldPlayer.getText().toLowerCase();
+                	players.add(name);
+                	name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+                    final JButton button = new JButton(name);
                     button.setToolTipText("Click to open profile!");
                     button.setVerticalTextPosition(SwingConstants.TOP);
                     button.setHorizontalTextPosition(SwingConstants.CENTER);
