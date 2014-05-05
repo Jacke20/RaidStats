@@ -4,13 +4,11 @@ import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.UIManager.*;
-import javax.swing.border.TitledBorder;
 
 /**
  * This class holds the main window and its components. Allows the user to enter a player name and realm
@@ -163,7 +161,7 @@ public class MainFrame{
                     listPanel.validate();
                     listPanel.repaint();
 
-                    JOptionPane.showMessageDialog(null, "Player successfully added!", "Message", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
+                    JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
                     button.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {

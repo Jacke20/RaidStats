@@ -16,7 +16,6 @@ import javax.swing.border.TitledBorder;
 
 public class PlayerProfile extends JPanel{
     private JSONObject object;
-    private int loadTime;
     public PlayerProfile(final JScrollPane scrollPane, final JPanel topPanel){
 
         JButton backButton = new JButton("\u22b2Back");
