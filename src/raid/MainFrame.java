@@ -59,6 +59,8 @@ public class MainFrame{
         contentPane.add(topPanel, BorderLayout.NORTH);
         contentPane.add(scrollPane, BorderLayout.CENTER);
 
+        // Set addPlayerButton as the default button to listen to enter.
+        frame.getRootPane().setDefaultButton(addPlayerButton);
         // Implement actions.
         addPlayerButton.addActionListener(new ActionListener() {
 

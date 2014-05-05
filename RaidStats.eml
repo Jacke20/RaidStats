@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/RaidStats"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="C:\Users\Jacke\Downloads\java-json.jar" scope="COMPILE">
+		<srcroot url="file://$USER_HOME$/Downloads/java-json.jar"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/java-json.jar/java-json.jar!/"/>
+	</lib>
+</component>
