@@ -117,8 +117,10 @@ public class PlayerProfile extends JPanel{
 
     public void getItemLevel(String character, String realm) {
         try {
-            JSONObject obj = getURL(character, realm);
-            add(new JLabel("Item level: " + obj.getJSONObject("items").get("averageItemLevelEquipped")));
+        	JSONObject obj = getURL(character, realm); 
+        	JSONObject items = obj.getJSONObject("items"); 
+        	
+        	add(new JLabel("Item level: " + items.get("averageItemLevel").toString() + " (" + items.get("averageItemLevelEquipped") + " equipped" ); } 
         } catch (Exception e) {
             e.printStackTrace();
 
