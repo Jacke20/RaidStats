@@ -59,7 +59,7 @@ public class PlayerProfile extends JPanel{
     public void getPlayerName(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
-                add(new JLabel("Player name: " + obj.get("name").toString()));
+                add(new JLabel("Player name: " + obj.get("name")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,13 +70,13 @@ public class PlayerProfile extends JPanel{
             if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0){
                 add(new JLabel("Professions: No professions"));
             }else if(obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)){
-                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name").toString() +
-                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank").toString() + "] "));
+                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
+                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] "));
             }else {
-                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name").toString() +
-                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank").toString() + "] " + ", "
-                        + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name").toString() + " [" +
-                        obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank").toString() + "]"));
+                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
+                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] " + ", "
+                        + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name") + " [" +
+                        obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank") + "]"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,7 +86,7 @@ public class PlayerProfile extends JPanel{
     public void getLevel(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
-            add(new JLabel("Level: " + obj.get("level").toString()));
+            add(new JLabel("Level: " + obj.get("level")));
         } catch (Exception e) {
             e.printStackTrace();
         }
