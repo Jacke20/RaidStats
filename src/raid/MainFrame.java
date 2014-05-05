@@ -1,27 +1,13 @@
 package raid;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.json.JSONObject;
@@ -79,11 +65,6 @@ public class MainFrame{
 
         // Set addPlayerButton as the default button to listen to enter.
         frame.getRootPane().setDefaultButton(addPlayerButton);
-
-        // Add a popupmenu to allow for removal of profile buttons.
-        final JPopupMenu popupMenu = new JPopupMenu();
-        final JMenuItem item = new JMenuItem("Remove");
-        popupMenu.add(item);
 
         // Implement actions.
         addPlayerButton.addActionListener(new ActionListener() {
@@ -199,9 +180,6 @@ public class MainFrame{
                             button.setBackground(defaultColor);
                         }
                     });
-                    listPanel.add(button);
-                    listPanel.validate();
-                    listPanel.repaint();
 
                     JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
                     button.addActionListener(new ActionListener() {
