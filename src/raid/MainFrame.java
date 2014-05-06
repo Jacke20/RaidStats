@@ -56,9 +56,11 @@ public class MainFrame{
         final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
         final JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
         final JPanel charPanel = new JPanel();
+        charPanel.setLayout(new BorderLayout());
         charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
         charPanel.setPreferredSize(new Dimension(320, 200));
         final JPanel grpPanel = new JPanel();
+        grpPanel.setLayout(new BorderLayout());
         grpPanel.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
         grpPanel.setPreferredSize(new Dimension(320, 200));
 
@@ -73,8 +75,8 @@ public class MainFrame{
         topPanel.add(realmTag);
         topPanel.add(realms);
         topPanel.add(addPlayerButton);
-        bottomPanel.add(charPanel, BorderLayout.WEST);
-        bottomPanel.add(grpPanel, BorderLayout.EAST);
+        bottomPanel.add(charPanel);
+        bottomPanel.add(grpPanel);
 
         // Add panels to content pane
         Container contentPane = frame.getContentPane();
@@ -99,7 +101,7 @@ public class MainFrame{
                     groupInfo.removeAll();
                     itemLevel.add(p.itemLevelValue());
                     groupInfo.itemLevelGroup(itemLevel);
-                    grpPanel.add(groupInfo, BorderLayout.EAST);
+                    grpPanel.add(groupInfo, BorderLayout.CENTER);
 
                     String name = textFieldPlayer.getText().toLowerCase();
                     final String nameDummy = name;
@@ -258,7 +260,7 @@ public class MainFrame{
                             p.getItemLevel();
                             //frame.getContentPane().removeAll();
                             charPanel.removeAll();
-                            charPanel.add(p, BorderLayout.WEST);
+                            charPanel.add(p, BorderLayout.CENTER);
                             frame.validate();
                             frame.repaint();
                         }
