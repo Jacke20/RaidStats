@@ -19,6 +19,10 @@ import javax.swing.event.MouseInputAdapter;
 
 import org.json.JSONObject;
 
+//TODO: Implement option to clear entire list.
+//TODO: Allow for characters with same name from different servers to be added.
+//TODO: Add more information about the whole group
+
 /**
  * This class holds the main window and its components. Allows the user to enter a player name and realm
  * for the game World of Warcraft to retrieve and display some interesting facts about their character.
@@ -64,10 +68,13 @@ public class MainFrame{
         grpPanel.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
         grpPanel.setPreferredSize(new Dimension(320, 200));
 
+        // Add a menu bar
+        final JMenuBar menu = new JMenuBar();
+        final JMenuItem menuItem = new JMenuItem("Clear");
+
         // Add a scroll pane
         //final JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //scrollPane.setBounds(20, 60, 0, 100);
-        listPanel.setPreferredSize(new Dimension(500, 300));
 
         // Add components to panels
         topPanel.add(characterTag);
@@ -77,17 +84,28 @@ public class MainFrame{
         topPanel.add(addPlayerButton);
         bottomPanel.add(charPanel);
         bottomPanel.add(grpPanel);
+        menu.add(menuItem);
 
         // Add panels to content pane
         Container contentPane = frame.getContentPane();
         contentPane.add(topPanel, BorderLayout.NORTH);
         contentPane.add(listPanel, BorderLayout.CENTER);
         contentPane.add(bottomPanel, BorderLayout.SOUTH);
+        menuItem.setToolTipText("Clear the panel of all profiles");
+        frame.setJMenuBar(menu);
 
         // Set addPlayerButton as the default button to listen to enter.
         frame.getRootPane().setDefaultButton(addPlayerButton);
 
         // Implement actions.
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listPanel.removeAll();
+                listPanel.revalidate();
+                listPanel.repaint();
+            }
+        });
         addPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -273,7 +291,7 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 650);
+        frame.setSize(600, 650);
         frame.setLocation(350, 50);
         frame.setVisible(true);
     }
