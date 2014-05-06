@@ -5,21 +5,28 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.MouseInputAdapter;
 
 import org.json.JSONObject;
@@ -51,6 +58,13 @@ public class MainFrame{
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
         final JPanel listPanel = new ListPanel();
+        final JPanel bottomPanel = new JPanel();
+        final JPanel charPanel = new JPanel();
+        charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        charPanel.setPreferredSize(new Dimension(245, 200));
+        final JPanel grpPanel = new JPanel();
+        grpPanel.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        grpPanel.setPreferredSize(new Dimension(245, 200));
         final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
 
 
@@ -71,11 +85,14 @@ public class MainFrame{
         topPanel.add(realmTag);
         topPanel.add(realms);
         topPanel.add(addPlayerButton);
+        bottomPanel.add(charPanel, BorderLayout.WEST);
+        bottomPanel.add(grpPanel, BorderLayout.EAST);
 
         // Add panels to content pane
         Container contentPane = frame.getContentPane();
         contentPane.add(topPanel, BorderLayout.NORTH);
         contentPane.add(scrollPane, BorderLayout.CENTER);
+        contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
         // Set addPlayerButton as the default button to listen to enter.
         frame.getRootPane().setDefaultButton(addPlayerButton);
@@ -259,7 +276,7 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(550, 400);
+        frame.setSize(550, 750);
         frame.setLocation(450, 200);
         frame.setVisible(true);
     }
