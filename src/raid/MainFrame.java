@@ -1,16 +1,33 @@
 package raid;
 
+<<<<<<< HEAD
 import java.awt.*;
+=======
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
+>>>>>>> 5200b23adc46d89a956c789312a1843408c1d32a
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -45,6 +62,18 @@ public class MainFrame{
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
         final JPanel listPanel = new ListPanel();
+<<<<<<< HEAD
+=======
+        final JPanel bottomPanel = new JPanel();
+        final JPanel charPanel = new JPanel();
+        charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        charPanel.setPreferredSize(new Dimension(245, 200));
+        final JPanel grpPanel = new JPanel();
+        grpPanel.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        grpPanel.setPreferredSize(new Dimension(245, 200));
+        final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
+
+>>>>>>> 5200b23adc46d89a956c789312a1843408c1d32a
 
         // Create components
         final JButton addPlayerButton = new JButton("Add character");
@@ -260,7 +289,11 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+<<<<<<< HEAD
         frame.setSize(550, 500);
+=======
+        frame.setSize(550, 750);
+>>>>>>> 5200b23adc46d89a956c789312a1843408c1d32a
         frame.setLocation(450, 200);
         frame.setVisible(true);
     }
