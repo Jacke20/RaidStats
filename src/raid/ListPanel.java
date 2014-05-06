@@ -9,12 +9,12 @@ import java.awt.*;
  */
 public class ListPanel extends JPanel {
     public ListPanel() {
-        GridLayout g = new GridLayout(10, 10);
+        GridLayout g = new GridLayout(5, 5);
         g.setHgap(5);
         g.setVgap(5);
         setLayout(g);
-        setBorder(BorderFactory.createTitledBorder(null, "Added Players", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        setBorder(BorderFactory.createTitledBorder(null, "Added characters", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
         setForeground(Color.WHITE);
-        setPreferredSize(new Dimension(400, 1000));
+        setPreferredSize(new Dimension(400, 300));
     }
 }

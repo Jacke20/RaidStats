@@ -34,10 +34,12 @@ public class MainFrame{
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
+        RealmList r = new RealmList();
         final JFrame frame = new JFrame("RaidAssister");
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
         final JPanel listPanel = new ListPanel();
+        final JComboBox<String> realms = new JComboBox<String>(r.getRealm());
 
         // Create components
         final JButton addPlayerButton = new JButton("Add character");
@@ -55,7 +57,7 @@ public class MainFrame{
         topPanel.add(characterTag);
         topPanel.add(textFieldPlayer);
         topPanel.add(realmTag);
-        topPanel.add(textFieldRealm);
+        topPanel.add(realms);
         topPanel.add(addPlayerButton);
 
         // Add panels to content pane
@@ -73,7 +75,7 @@ public class MainFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
-                JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
+                JSONObject obj = p.getURL(textFieldPlayer.getText(), realms.getSelectedItem().toString());
 
 
                 if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) {
@@ -84,6 +86,7 @@ public class MainFrame{
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final JButton button = new JButton(name);
                     final JButton rButton = new JButton("X");
+                    final JPanel tmp = new JPanel();
                     button.setToolTipText("Click to open profile!");
                     button.setVerticalTextPosition(SwingConstants.TOP);
                     button.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -92,7 +95,7 @@ public class MainFrame{
 
                     // Retrieve player and realm values from text fields.
                     final String player = textFieldPlayer.getText();
-                    final String realm = textFieldRealm.getText();
+                    final String realm = realms.getSelectedItem().toString();
 
                     // Go through jsonobject to check which class the player is and choose icon and colour based on that.
                     // Using default class colours from: http://www.wowwiki.com/Class_colors
@@ -128,6 +131,7 @@ public class MainFrame{
                                 float[] colorPriest = Color.RGBtoHSB(255, 255, 255, null);
                                 button.setBackground(Color.getHSBColor(colorPriest[0], colorPriest[1], colorPriest[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+
                                 break;
                             case 6:
                                 button.setIcon(new ImageIcon("images/deathknight.png"));
@@ -193,8 +197,6 @@ public class MainFrame{
                             listPanel.repaint();
                         }
                     });
-
-
                     listPanel.add(button);
                     listPanel.validate();
                     listPanel.repaint();
@@ -217,7 +219,7 @@ public class MainFrame{
                         }
                     });
                 } else {
-                    JOptionPane.showMessageDialog(null, "Please make sure that the name and realm are correct", "Character or realm not found", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please make sure that the entered values are correct and that there are no duplicates", "Character or realm not found", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
