@@ -255,7 +255,7 @@ public class MainFrame{
                             p.getLevel();
                             p.getCharacterClass();
                             p.getProfessions();
-                            p.itemLevelValue();
+                            p.getItemLevel();
                             //frame.getContentPane().removeAll();
                             charPanel.removeAll();
                             charPanel.add(p, BorderLayout.WEST);

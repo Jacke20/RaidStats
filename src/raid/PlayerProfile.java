@@ -9,8 +9,9 @@ import java.util.HashMap;
 
 
 
-import org.json.*;
 
+
+import org.json.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -63,7 +64,7 @@ public class PlayerProfile extends JPanel {
 
     public void getPlayerName() {
         try {
-            JLabel label = new JLabel("Player name: " + object.get("name"));
+            JLabel label = new JLabel("Player name: " + name());
             label.setFont(new Font("times new roman", Font.PLAIN, 11));
             add(label);
         } catch (Exception e) {
@@ -111,7 +112,56 @@ public class PlayerProfile extends JPanel {
      */
     public void getCharacterClass() {
         try {
-            HashMap classMap = new HashMap();
+            JLabel label = new JLabel("Class: " + wowClass());
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(label);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void getItemLevel() {
+        try {
+            JLabel label = new JLabel("Item level: " + itemLevelValue() + " (" + iLvlEquipped() + " equipped" + ")");
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(label);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public int itemLevelValue() {
+        try {
+            String val = object.getJSONObject("items").get("averageItemLevel").toString();
+            return Integer.parseInt(val);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public String iLvlEquipped(){
+    	try {
+			return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+    }
+    
+    public String name(){
+    	try {
+			return object.get("name").toString();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+    }
+    
+    public String wowClass(){
+    	try {
+    		HashMap<Integer, String> classMap = new HashMap<Integer, String>();
             classMap.put(1, "Warrior");
             classMap.put(2, "Paladin");
             classMap.put(3, "Hunter");
@@ -123,31 +173,11 @@ public class PlayerProfile extends JPanel {
             classMap.put(9, "Warlock");
             classMap.put(10, "Monk");
             classMap.put(11, "Druid");
-            JLabel label = new JLabel("Class: " + classMap.get(object.get("class")));
-            label.setFont(new Font("times new roman", Font.PLAIN, 11));
-            add(label);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getItemLevel() {
-        try {
-            JSONObject items = object.getJSONObject("items");
-            JLabel label = new JLabel("Item level: " + items.get("averageItemLevel") + " (" + items.get("averageItemLevelEquipped") + " equipped" + ")");
-            label.setFont(new Font("times new roman", Font.PLAIN, 11));
-            add(label);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public int itemLevelValue() {
-        try {
-            String val = object.getJSONObject("items").get("averageItemLevelEquipped").toString();
-            return Integer.parseInt(val);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
+       
+            return classMap.get(object.get("class"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
     }
 }
