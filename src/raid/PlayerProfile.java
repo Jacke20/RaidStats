@@ -141,4 +141,13 @@ public class PlayerProfile extends JPanel {
             e.printStackTrace();
         }
     }
+    public int itemLevelValue() {
+        try {
+            String val = object.getJSONObject("items").get("averageItemLevelEquipped").toString();
+            return Integer.parseInt(val);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

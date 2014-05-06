@@ -26,7 +26,7 @@ import org.json.JSONObject;
  */
 public class MainFrame{
     private static ArrayList<String> players = new ArrayList<String>();
-    private HashMap groupInfo;
+    private static ArrayList<Integer> itemLevel = new ArrayList<Integer>();
     public MainFrame(){
     }
     // Use Nimbus and default UIManager
@@ -42,6 +42,7 @@ public class MainFrame{
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
         final RealmList realmList = new RealmList();
+        final GroupInfo groupInfo = new GroupInfo();
         final JFrame frame = new JFrame("RaidAssister");
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
@@ -93,6 +94,13 @@ public class MainFrame{
 
                 if (!textFieldPlayer.getText().equals("") && obj != null) { // && !players.contains(textFieldPlayer.getText().toLowerCase())
                     // Create button with players name and modify text-icon relation.
+
+                    // Update group panel
+                    groupInfo.removeAll();
+                    itemLevel.add(p.itemLevelValue());
+                    groupInfo.itemLevelGroup(itemLevel);
+                    grpPanel.add(groupInfo, BorderLayout.EAST);
+
                     String name = textFieldPlayer.getText().toLowerCase();
                     final String nameDummy = name;
                     players.add(nameDummy);
@@ -232,8 +240,8 @@ public class MainFrame{
                     });
 
                     listPanel.add(button);
-                    listPanel.validate();
-                    listPanel.repaint();
+                    frame.validate();
+                    frame.repaint();
 
                     JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
 
@@ -247,10 +255,10 @@ public class MainFrame{
                             p.getLevel();
                             p.getCharacterClass();
                             p.getProfessions();
-                            p.getItemLevel();
+                            p.itemLevelValue();
                             //frame.getContentPane().removeAll();
                             charPanel.removeAll();
-                            charPanel.add(p, BorderLayout.CENTER);
+                            charPanel.add(p, BorderLayout.WEST);
                             frame.validate();
                             frame.repaint();
                         }
