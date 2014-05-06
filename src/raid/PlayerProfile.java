@@ -134,7 +134,6 @@ public class PlayerProfile extends JPanel {
     	try {
 			return object.getJSONObject("items").get("averageItemLevel").toString();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -145,7 +144,6 @@ public class PlayerProfile extends JPanel {
     	try {
 			return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -156,7 +154,6 @@ public class PlayerProfile extends JPanel {
     	try {
 			return object.get("name").toString();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -180,7 +177,6 @@ public class PlayerProfile extends JPanel {
        
             return classMap.get(object.get("class"));
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
