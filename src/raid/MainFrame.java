@@ -54,7 +54,7 @@ public class MainFrame{
         final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
         final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
-        final JPanel bottomPanel = new JPanel();
+        final JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
         final JPanel charPanel = new JPanel();
         charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
         charPanel.setPreferredSize(new Dimension(320, 200));
@@ -65,7 +65,7 @@ public class MainFrame{
         // Add a scroll pane
         //final JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //scrollPane.setBounds(20, 60, 0, 100);
-        listPanel.setPreferredSize(new Dimension(500, 400));
+        listPanel.setPreferredSize(new Dimension(500, 300));
 
         // Add components to panels
         topPanel.add(characterTag);
@@ -271,7 +271,7 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 650);
+        frame.setSize(500, 650);
         frame.setLocation(350, 50);
         frame.setVisible(true);
     }
