@@ -37,7 +37,7 @@ public class PlayerProfile extends JPanel {
         //add(backButton);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
-        setPreferredSize(new Dimension(200, 150));
+        setPreferredSize(new Dimension(300, 200));
     }
 
     public JSONObject getURL(String character, String realm) {

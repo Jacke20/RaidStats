@@ -55,10 +55,10 @@ public class MainFrame{
         final JPanel bottomPanel = new JPanel();
         final JPanel charPanel = new JPanel();
         charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
-        charPanel.setPreferredSize(new Dimension(245, 200));
+        charPanel.setPreferredSize(new Dimension(320, 200));
         final JPanel grpPanel = new JPanel();
         grpPanel.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
-        grpPanel.setPreferredSize(new Dimension(245, 200));
+        grpPanel.setPreferredSize(new Dimension(320, 200));
 
         // Add a scroll pane
         final JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -262,7 +262,7 @@ public class MainFrame{
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 650);
-        frame.setLocation(450, 200);
+        frame.setLocation(350, 50);
         frame.setVisible(true);
     }
 }
