@@ -18,8 +18,8 @@ import org.json.JSONObject;
  * Created by Jacke on 2014-04-29.
  */
 public class MainFrame{
-	private static ArrayList<String> players = new ArrayList<String>();
-	
+    private static ArrayList<String> players = new ArrayList<String>();
+
     public MainFrame(){
     }
     // Use Nimbus and default UIManager
@@ -73,18 +73,22 @@ public class MainFrame{
         addPlayerButton.addActionListener(new ActionListener() {
 
 
-			@Override
+            @Override
             public void actionPerformed(ActionEvent e) {
                 final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
                 JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
 
 
+<<<<<<< HEAD
                 if (!textFieldPlayer.getText().equals("") && obj != null) { // && !players.contains(textFieldPlayer.getText().toLowerCase())
+=======
+                if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) {
+>>>>>>> 7fb8596d005230cd4d1da8002da1024416d8b54c
                     // Create button with players name and modify text-icon relation.
-                	String name = textFieldPlayer.getText().toLowerCase();
-                	final String nameDummy = name;
-                	players.add(nameDummy);
-                	name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+                    String name = textFieldPlayer.getText().toLowerCase();
+                    final String nameDummy = name;
+                    players.add(nameDummy);
+                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
                     final JButton button = new JButton(name);
                     final JButton rButton = new JButton("X");
                     button.setToolTipText("Click to open profile!");
@@ -187,6 +191,7 @@ public class MainFrame{
                         }
                     });
                     rButton.addActionListener(new ActionListener() {
+<<<<<<< HEAD
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
@@ -197,6 +202,19 @@ public class MainFrame{
 						}
 					});
 						
+=======
+
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            players.remove(nameDummy);
+                            listPanel.remove(button);
+                            listPanel.validate();
+                            listPanel.repaint();
+                        }
+                    });
+
+
+>>>>>>> 7fb8596d005230cd4d1da8002da1024416d8b54c
                     listPanel.add(button);
                     listPanel.validate();
                     listPanel.repaint();
@@ -229,5 +247,5 @@ public class MainFrame{
         frame.setSize(500, 400);
         frame.setLocation(450, 200);
         frame.setVisible(true);
-            }
+    }
 }
