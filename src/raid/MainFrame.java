@@ -1,14 +1,26 @@
 package raid;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.MouseInputAdapter;
 
 import org.json.JSONObject;
 
@@ -34,17 +46,17 @@ public class MainFrame{
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        RealmList r = new RealmList();
+        final RealmList realmList = new RealmList();
         final JFrame frame = new JFrame("RaidAssister");
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
         final JPanel listPanel = new ListPanel();
-        final JComboBox<String> realms = new JComboBox<String>(r.getRealm());
+        final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
+
 
         // Create components
         final JButton addPlayerButton = new JButton("Add character");
         final JTextField textFieldPlayer = new JTextField(10);
-        final JTextField textFieldRealm = new JTextField(10);
         final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
 
@@ -77,21 +89,29 @@ public class MainFrame{
                 final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
                 JSONObject obj = p.getURL(textFieldPlayer.getText(), realms.getSelectedItem().toString());
 
-
-                if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) {
+                if (!textFieldPlayer.getText().equals("") && obj != null) { // && !players.contains(textFieldPlayer.getText().toLowerCase())
                     // Create button with players name and modify text-icon relation.
                     String name = textFieldPlayer.getText().toLowerCase();
                     final String nameDummy = name;
                     players.add(nameDummy);
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
-                    final JButton button = new JButton(name);
-                    final JButton rButton = new JButton("X");
-                    final JPanel tmp = new JPanel();
+                    final JPanel button = new JPanel(new BorderLayout());
+                    final JPanel buttonCross = new JPanel(new FlowLayout());
+                    final JButton rButton = new JButton();
+                    final JLabel nameL = new JLabel(name, JLabel.CENTER);
+
+
+                    button.add(nameL, BorderLayout.CENTER);
                     button.setToolTipText("Click to open profile!");
-                    button.setVerticalTextPosition(SwingConstants.TOP);
-                    button.setHorizontalTextPosition(SwingConstants.CENTER);
-                    button.setIconTextGap(0);
-                    button.add(rButton);
+                    rButton.setIcon(new ImageIcon("images/cross.png"));
+                    rButton.setPreferredSize(new Dimension(16, 16));
+                    rButton.setOpaque(false);
+                    rButton.setContentAreaFilled(false);
+                    rButton.setBorderPainted(false);
+                    buttonCross.add(rButton);
+                    button.add(buttonCross, BorderLayout.EAST);
+                    button.setBorder(new EmptyBorder(0, 10, 0, 0));
+                    buttonCross.setOpaque(false);
 
                     // Retrieve player and realm values from text fields.
                     final String player = textFieldPlayer.getText();
@@ -103,68 +123,79 @@ public class MainFrame{
                         String playerClass = obj.get("class").toString();
                         switch (Integer.parseInt(playerClass)) {
                             case 1:
-                                button.setIcon(new ImageIcon("images/warrior.png"));
+                                JLabel picLabelWarrior = new JLabel(new ImageIcon("images/warrior.png"));
+                                button.add(picLabelWarrior, BorderLayout.WEST);
                                 float[] colorWarrior = Color.RGBtoHSB(199, 156, 110, null);
                                 button.setBackground(Color.getHSBColor(colorWarrior[0], colorWarrior[1], colorWarrior[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 2:
-                                button.setIcon(new ImageIcon("images/paladin.png"));
+                                JLabel picLabelPaladin = new JLabel(new ImageIcon("images/paladin.png"));
+                                button.add(picLabelPaladin, BorderLayout.WEST);
                                 float[] colorPaladin = Color.RGBtoHSB(245, 140, 186, null);
                                 button.setBackground(Color.getHSBColor(colorPaladin[0], colorPaladin[1], colorPaladin[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 3:
-                                button.setIcon(new ImageIcon("images/hunter.png"));
+                                JLabel picLabelHunter = new JLabel(new ImageIcon("images/hunter.png"));
+                                button.add(picLabelHunter, BorderLayout.WEST);
                                 float[] colorHunter = Color.RGBtoHSB(171, 212, 115, null);
                                 button.setBackground(Color.getHSBColor(colorHunter[0], colorHunter[1], colorHunter[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 4:
-                                button.setIcon(new ImageIcon("images/rogue.png"));
-                                float[] colorRogue = Color.RGBtoHSB(255, 145, 105, null);
+                                JLabel picLabelRogue = new JLabel(new ImageIcon("images/rogue.png"));
+                                button.add(picLabelRogue, BorderLayout.WEST);
+                                float[] colorRogue = Color.RGBtoHSB(255, 245, 105, null);
                                 button.setBackground(Color.getHSBColor(colorRogue[0], colorRogue[1], colorRogue[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 5:
-                                button.setIcon(new ImageIcon("images/priest.png"));
+                                JLabel picLabelPriest = new JLabel(new ImageIcon("images/priest.png"));
+                                button.add(picLabelPriest, BorderLayout.WEST);
                                 float[] colorPriest = Color.RGBtoHSB(255, 255, 255, null);
                                 button.setBackground(Color.getHSBColor(colorPriest[0], colorPriest[1], colorPriest[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
-
+                                buttonCross.setBackground(Color.getHSBColor(colorPriest[0], colorPriest[1], colorPriest[2]));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 6:
-                                button.setIcon(new ImageIcon("images/deathknight.png"));
+                                JLabel picLabelDeathknight = new JLabel(new ImageIcon("images/deathknight.png"));
+                                button.add(picLabelDeathknight, BorderLayout.WEST);
                                 float[] colorDeathKnight = Color.RGBtoHSB(196, 30, 59, null);
                                 button.setBackground(Color.getHSBColor(colorDeathKnight[0], colorDeathKnight[1], colorDeathKnight[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 7:
-                                button.setIcon(new ImageIcon("images/shaman.png"));
+                                JLabel picLabelShaman = new JLabel(new ImageIcon("images/shaman.png"));
+                                button.add(picLabelShaman, BorderLayout.WEST);
                                 float[] colorShaman = Color.RGBtoHSB(0, 112, 222, null);
                                 button.setBackground(Color.getHSBColor(colorShaman[0], colorShaman[1], colorShaman[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 8:
-                                button.setIcon(new ImageIcon("images/mage.png"));
+                                JLabel picLabelMage = new JLabel(new ImageIcon("images/mage.png"));
+                                button.add(picLabelMage, BorderLayout.WEST);
                                 float[] colorMage = Color.RGBtoHSB(105, 204, 240, null);
                                 button.setBackground(Color.getHSBColor(colorMage[0], colorMage[1], colorMage[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 9:
-                                button.setIcon(new ImageIcon("images/warlock.png"));
+                                JLabel picLabelWarlock = new JLabel(new ImageIcon("images/warlock.png"));
+                                button.add(picLabelWarlock, BorderLayout.WEST);
                                 float[] colorWarlock = Color.RGBtoHSB(148, 130, 201, null);
                                 button.setBackground(Color.getHSBColor(colorWarlock[0], colorWarlock[1], colorWarlock[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 10:
-                                button.setIcon(new ImageIcon("images/monk.png"));
+                                JLabel picLabelMonk = new JLabel(new ImageIcon("images/monk.png"));
+                                button.add(picLabelMonk, BorderLayout.WEST);
                                 float[] colorMonk = Color.RGBtoHSB(0, 255, 150, null);
                                 button.setBackground(Color.getHSBColor(colorMonk[0], colorMonk[1], colorMonk[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 11:
-                                button.setIcon(new ImageIcon("images/druid.png"));
+                                JLabel picLabelDruid = new JLabel(new ImageIcon("images/druid.png"));
+                                button.add(picLabelDruid, BorderLayout.WEST);
                                 float[] colorDruid = Color.RGBtoHSB(255, 125, 10, null);
                                 button.setBackground(Color.getHSBColor(colorDruid[0], colorDruid[1], colorDruid[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
@@ -197,14 +228,16 @@ public class MainFrame{
                             listPanel.repaint();
                         }
                     });
+
                     listPanel.add(button);
                     listPanel.validate();
                     listPanel.repaint();
 
                     JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
-                    button.addActionListener(new ActionListener() {
+
+                    button.addMouseListener(new MouseInputAdapter() {
                         @Override
-                        public void actionPerformed(ActionEvent e) {
+                        public void mouseClicked(MouseEvent e) {
                             final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
 
                             p.getPlayerName(player, realm);
@@ -219,14 +252,14 @@ public class MainFrame{
                         }
                     });
                 } else {
-                    JOptionPane.showMessageDialog(null, "Please make sure that the entered values are correct and that there are no duplicates", "Character or realm not found", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please make sure that the name and realm are correct and that there are no duplicates", "Character or realm not found", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(550, 400);
         frame.setLocation(450, 200);
         frame.setVisible(true);
     }
