@@ -30,7 +30,7 @@ import org.json.JSONObject;
  */
 public class MainFrame{
     private static ArrayList<String> players = new ArrayList<String>();
-    private static ArrayList<Integer> itemLevel = new ArrayList<Integer>();
+    private static HashMap<String, Integer> itemLevel = new HashMap<String, Integer>();
     public MainFrame(){
     }
     // Use Nimbus and default UIManager
@@ -98,14 +98,6 @@ public class MainFrame{
         frame.getRootPane().setDefaultButton(addPlayerButton);
 
         // Implement actions.
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listPanel.removeAll();
-                listPanel.revalidate();
-                listPanel.repaint();
-            }
-        });
         addPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,12 +106,6 @@ public class MainFrame{
 
                 if (!textFieldPlayer.getText().equals("") && obj != null) { // && !players.contains(textFieldPlayer.getText().toLowerCase())
                     // Create button with players name and modify text-icon relation.
-
-                    // Update group panel
-                    groupInfo.removeAll();
-                    itemLevel.add(p.itemLevelValue());
-                    groupInfo.itemLevelGroup(itemLevel);
-                    grpPanel.add(groupInfo, BorderLayout.CENTER);
 
                     String name = textFieldPlayer.getText().toLowerCase();
                     final String nameDummy = name;
@@ -130,6 +116,26 @@ public class MainFrame{
                     final JButton rButton = new JButton();
                     final JLabel nameL = new JLabel(name, JLabel.CENTER);
 
+                    // Add clear function to menu.
+                    menuItem.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            players.remove(nameDummy);
+                            groupInfo.removeAll();
+                            itemLevel.remove(nameDummy);
+                            groupInfo.itemLevelGroup(itemLevel);
+                            grpPanel.add(groupInfo, BorderLayout.CENTER);
+                            listPanel.removeAll();
+                            frame.validate();
+                            frame.repaint();
+                        }
+                    });
+                    
+                    // Update group panel
+                    groupInfo.removeAll();
+                    itemLevel.put(nameDummy, p.itemLevelValue());
+                    groupInfo.itemLevelGroup(itemLevel);
+                    grpPanel.add(groupInfo, BorderLayout.CENTER);
 
                     button.add(nameL, BorderLayout.CENTER);
                     button.setToolTipText("Click to open profile!");
@@ -253,9 +259,13 @@ public class MainFrame{
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             players.remove(nameDummy);
+                            groupInfo.removeAll();
+                            itemLevel.remove(nameDummy);
+                            groupInfo.itemLevelGroup(itemLevel);
+                            grpPanel.add(groupInfo, BorderLayout.CENTER);
                             listPanel.remove(button);
-                            listPanel.validate();
-                            listPanel.repaint();
+                            frame.validate();
+                            frame.repaint();
                         }
                     });
 
@@ -291,7 +301,8 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 650);
+        frame.setSize(572, 630);
+        frame.setResizable(false);
         frame.setLocation(350, 50);
         frame.setVisible(true);
     }
