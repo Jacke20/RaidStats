@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,7 +26,7 @@ import org.json.JSONObject;
  */
 public class MainFrame{
     private static ArrayList<String> players = new ArrayList<String>();
-
+    private HashMap groupInfo;
     public MainFrame(){
     }
     // Use Nimbus and default UIManager
@@ -61,9 +62,9 @@ public class MainFrame{
         grpPanel.setPreferredSize(new Dimension(320, 200));
 
         // Add a scroll pane
-        final JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setBounds(20, 60, 0, 100);
-        scrollPane.setPreferredSize(new Dimension(500, 400));
+        //final JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        //scrollPane.setBounds(20, 60, 0, 100);
+        listPanel.setPreferredSize(new Dimension(500, 400));
 
         // Add components to panels
         topPanel.add(characterTag);
@@ -77,7 +78,7 @@ public class MainFrame{
         // Add panels to content pane
         Container contentPane = frame.getContentPane();
         contentPane.add(topPanel, BorderLayout.NORTH);
-        contentPane.add(scrollPane, BorderLayout.CENTER);
+        contentPane.add(listPanel, BorderLayout.CENTER);
         contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
         // Set addPlayerButton as the default button to listen to enter.
@@ -87,7 +88,7 @@ public class MainFrame{
         addPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
+                final PlayerProfile p = new PlayerProfile();
                 JSONObject obj = p.getURL(textFieldPlayer.getText(), realms.getSelectedItem().toString());
 
                 if (!textFieldPlayer.getText().equals("") && obj != null) { // && !players.contains(textFieldPlayer.getText().toLowerCase())
@@ -239,13 +240,14 @@ public class MainFrame{
                     button.addMouseListener(new MouseInputAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
+                            final PlayerProfile p = new PlayerProfile();
 
-                            p.getPlayerName(player, realm);
-                            p.getLevel(player, realm);
-                            p.getClass(player, realm);
-                            p.getProfessions(player, realm);
-                            p.getItemLevel(player, realm);
+                            p.getURL(player, realm);
+                            p.getPlayerName();
+                            p.getLevel();
+                            p.getCharacterClass();
+                            p.getProfessions();
+                            p.getItemLevel();
                             //frame.getContentPane().removeAll();
                             charPanel.removeAll();
                             charPanel.add(p, BorderLayout.CENTER);

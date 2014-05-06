@@ -18,9 +18,9 @@ import javax.swing.border.TitledBorder;
 public class PlayerProfile extends JPanel {
     private JSONObject object;
 
-    public PlayerProfile(final JScrollPane scrollPane, final JPanel topPanel) {
+    public PlayerProfile() {
 
-        JButton backButton = new JButton("\u22b2Back");
+        /*JButton backButton = new JButton("\u22b2Back");
         backButton.addActionListener(new ActionListener() {
                                          @Override
                                          public void actionPerformed(ActionEvent e) {
@@ -33,7 +33,7 @@ public class PlayerProfile extends JPanel {
                                              repaint();
                                          }
                                      }
-        );
+        );*/
         //add(backButton);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
@@ -61,35 +61,33 @@ public class PlayerProfile extends JPanel {
         return object;
     }
 
-    public void getPlayerName(String character, String realm) {
+    public void getPlayerName() {
         try {
-            JSONObject obj = getURL(character, realm);
-            JLabel label = new JLabel("Player name: " + obj.get("name"));
-            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            JLabel label = new JLabel("Player name: " + object.get("name"));
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
             add(label);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void getProfessions(String character, String realm) {
+    public void getProfessions() {
         try {
-            JSONObject obj = getURL(character, realm);
-            if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0) {
+            if (object.getJSONObject("professions").getJSONArray("primary").length() == 0) {
                 JLabel label = new JLabel("Professions: No professions");
-                label.setFont(new Font("times new roman", Font.PLAIN, 10));
+                label.setFont(new Font("times new roman", Font.PLAIN, 11));
                 add(label);
-            } else if (obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)) {
-                JLabel label = new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
-                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] ");
-                label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            } else if (object.getJSONObject("professions").getJSONArray("primary").get(0) != null && object.getJSONObject("professions").getJSONArray("primary").isNull(1)) {
+                JLabel label = new JLabel("Professions:  " + object.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
+                        " [" + object.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] ");
+                label.setFont(new Font("times new roman", Font.PLAIN, 11));
                 add(label);
             } else {
-                JLabel label = new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
-                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] " + ", "
-                        + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name") + " [" +
-                        obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank") + "]");
-                label.setFont(new Font("times new roman", Font.PLAIN, 10));
+                JLabel label = new JLabel("Professions:  " + object.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
+                        " [" + object.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] " + ", "
+                        + object.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name") + " [" +
+                        object.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank") + "]");
+                label.setFont(new Font("times new roman", Font.PLAIN, 11));
                 add(label);
             }
         } catch (Exception e) {
@@ -98,11 +96,10 @@ public class PlayerProfile extends JPanel {
         }
     }
 
-    public void getLevel(String character, String realm) {
+    public void getLevel() {
         try {
-            JSONObject obj = getURL(character, realm);
-            JLabel label = new JLabel("Level: " + obj.get("level"));
-            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            JLabel label = new JLabel("Level: " + object.get("level"));
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
             add(label);
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,9 +109,8 @@ public class PlayerProfile extends JPanel {
     /**
      * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
      */
-    public void getClass(String character, String realm) {
+    public void getCharacterClass() {
         try {
-            JSONObject obj = getURL(character, realm);
             HashMap classMap = new HashMap();
             classMap.put(1, "Warrior");
             classMap.put(2, "Paladin");
@@ -127,20 +123,19 @@ public class PlayerProfile extends JPanel {
             classMap.put(9, "Warlock");
             classMap.put(10, "Monk");
             classMap.put(11, "Druid");
-            JLabel label = new JLabel("Class: " + classMap.get(obj.get("class")));
-            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            JLabel label = new JLabel("Class: " + classMap.get(object.get("class")));
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
             add(label);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void getItemLevel(String character, String realm) {
+    public void getItemLevel() {
         try {
-            JSONObject obj = getURL(character, realm);
-            JSONObject items = obj.getJSONObject("items");
+            JSONObject items = object.getJSONObject("items");
             JLabel label = new JLabel("Item level: " + items.get("averageItemLevel") + " (" + items.get("averageItemLevelEquipped") + " equipped" + ")");
-            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
             add(label);
         } catch (Exception e) {
             e.printStackTrace();
