@@ -37,7 +37,10 @@ public class MainFrame{
         final JFrame frame = new JFrame("RaidAssister");
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
+        
         final JPanel listPanel = new ListPanel();
+        
+       
 
         // Create components
         final JButton addPlayerButton = new JButton("Add character");
@@ -76,7 +79,7 @@ public class MainFrame{
                 JSONObject obj = p.getURL(textFieldPlayer.getText(), textFieldRealm.getText());
 
 
-                if (!textFieldPlayer.getText().equals("") && obj != null && !players.contains(textFieldPlayer.getText().toLowerCase())) { 
+                if (!textFieldPlayer.getText().equals("") && obj != null) { // && !players.contains(textFieldPlayer.getText().toLowerCase())
                     // Create button with players name and modify text-icon relation.
                 	String name = textFieldPlayer.getText().toLowerCase();
                 	final String nameDummy = name;
@@ -119,7 +122,7 @@ public class MainFrame{
                                 break;
                             case 4:
                                 button.setIcon(new ImageIcon("images/rogue.png"));
-                                float[] colorRogue = Color.RGBtoHSB(255, 145, 105, null);
+                                float[] colorRogue = Color.RGBtoHSB(255, 245, 105, null);
                                 button.setBackground(Color.getHSBColor(colorRogue[0], colorRogue[1], colorRogue[2]));
                                 button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
@@ -183,7 +186,6 @@ public class MainFrame{
                             button.setBackground(defaultColor);
                         }
                     });
-<<<<<<< HEAD
                     rButton.addActionListener(new ActionListener() {
 						
 						@Override
@@ -195,12 +197,9 @@ public class MainFrame{
 						}
 					});
 						
-					
                     listPanel.add(button);
                     listPanel.validate();
                     listPanel.repaint();
-=======
->>>>>>> 703fbe94e6b7a248e89b41c758f1aeece8ad4d16
 
                     JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
                     button.addActionListener(new ActionListener() {
