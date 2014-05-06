@@ -172,35 +172,35 @@ public class MainFrame{
                                 button.add(picLabelShaman, BorderLayout.WEST);
                                 float[] colorShaman = Color.RGBtoHSB(0, 112, 222, null);
                                 button.setBackground(Color.getHSBColor(colorShaman[0], colorShaman[1], colorShaman[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 8:
                                 JLabel picLabelMage = new JLabel(new ImageIcon("images/mage.png"));
                                 button.add(picLabelMage, BorderLayout.WEST);
                                 float[] colorMage = Color.RGBtoHSB(105, 204, 240, null);
                                 button.setBackground(Color.getHSBColor(colorMage[0], colorMage[1], colorMage[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 9:
                                 JLabel picLabelWarlock = new JLabel(new ImageIcon("images/warlock.png"));
                                 button.add(picLabelWarlock, BorderLayout.WEST);
                                 float[] colorWarlock = Color.RGBtoHSB(148, 130, 201, null);
                                 button.setBackground(Color.getHSBColor(colorWarlock[0], colorWarlock[1], colorWarlock[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 10:
                                 JLabel picLabelMonk = new JLabel(new ImageIcon("images/monk.png"));
                                 button.add(picLabelMonk, BorderLayout.WEST);
                                 float[] colorMonk = Color.RGBtoHSB(0, 255, 150, null);
                                 button.setBackground(Color.getHSBColor(colorMonk[0], colorMonk[1], colorMonk[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 11:
                                 JLabel picLabelDruid = new JLabel(new ImageIcon("images/druid.png"));
                                 button.add(picLabelDruid, BorderLayout.WEST);
                                 float[] colorDruid = Color.RGBtoHSB(255, 125, 10, null);
                                 button.setBackground(Color.getHSBColor(colorDruid[0], colorDruid[1], colorDruid[2]));
-                                button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
+                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                         }
                     } catch (Exception e1) {
