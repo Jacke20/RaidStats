@@ -1,13 +1,6 @@
 package raid;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.MouseInputAdapter;
 
 import org.json.JSONObject;
@@ -51,14 +45,20 @@ public class MainFrame{
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         final JPanel topPanel = new JPanel();
         final JPanel listPanel = new ListPanel();
-        final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
-
 
         // Create components
         final JButton addPlayerButton = new JButton("Add character");
         final JTextField textFieldPlayer = new JTextField(10);
         final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
+        final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
+        final JPanel bottomPanel = new JPanel();
+        final JPanel charPanel = new JPanel();
+        charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        charPanel.setPreferredSize(new Dimension(245, 200));
+        final JPanel grpPanel = new JPanel();
+        grpPanel.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        grpPanel.setPreferredSize(new Dimension(245, 200));
 
         // Add a scroll pane
         final JScrollPane scrollPane = new JScrollPane(listPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -71,19 +71,20 @@ public class MainFrame{
         topPanel.add(realmTag);
         topPanel.add(realms);
         topPanel.add(addPlayerButton);
+        bottomPanel.add(charPanel, BorderLayout.WEST);
+        bottomPanel.add(grpPanel, BorderLayout.EAST);
 
         // Add panels to content pane
         Container contentPane = frame.getContentPane();
         contentPane.add(topPanel, BorderLayout.NORTH);
         contentPane.add(scrollPane, BorderLayout.CENTER);
+        contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
         // Set addPlayerButton as the default button to listen to enter.
         frame.getRootPane().setDefaultButton(addPlayerButton);
 
         // Implement actions.
         addPlayerButton.addActionListener(new ActionListener() {
-
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 final PlayerProfile p = new PlayerProfile(scrollPane, topPanel);
@@ -245,8 +246,8 @@ public class MainFrame{
                             p.getClass(player, realm);
                             p.getProfessions(player, realm);
                             p.getItemLevel(player, realm);
-                            frame.getContentPane().removeAll();
-                            frame.getContentPane().add(p);
+                            //frame.getContentPane().removeAll();
+                            charPanel.add(p);
                             frame.validate();
                             frame.repaint();
                         }
@@ -259,7 +260,7 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(550, 400);
+        frame.setSize(550, 500);
         frame.setLocation(450, 200);
         frame.setVisible(true);
     }

@@ -33,9 +33,10 @@ public class PlayerProfile extends JPanel {
                                          }
                                      }
         );
-        add(backButton);
+        //add(backButton);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        //setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        setPreferredSize(new Dimension(200, 150));
     }
 
     public JSONObject getURL(String character, String realm) {
@@ -44,7 +45,7 @@ public class PlayerProfile extends JPanel {
         try {
             URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + characterName + "?fields=items,professions");
             BufferedReader in = new BufferedReader(
-                    new InputStreamReader(profile.openStream()));
+                    new InputStreamReader(profile.openStream(), "UTF-8"));
 
             String inputLine;
             String json = "";
@@ -62,7 +63,9 @@ public class PlayerProfile extends JPanel {
     public void getPlayerName(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
-            add(new JLabel("Player name: " + obj.get("name")));
+            JLabel label = new JLabel("Player name: " + obj.get("name"));
+            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            add(label);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,15 +75,21 @@ public class PlayerProfile extends JPanel {
         try {
             JSONObject obj = getURL(character, realm);
             if (obj.getJSONObject("professions").getJSONArray("primary").length() == 0) {
-                add(new JLabel("Professions: No professions"));
+                JLabel label = new JLabel("Professions: No professions");
+                label.setFont(new Font("times new roman", Font.PLAIN, 10));
+                add(label);
             } else if (obj.getJSONObject("professions").getJSONArray("primary").get(0) != null && obj.getJSONObject("professions").getJSONArray("primary").isNull(1)) {
-                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
-                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] "));
+                JLabel label = new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
+                        " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] ");
+                label.setFont(new Font("times new roman", Font.PLAIN, 10));
+                add(label);
             } else {
-                add(new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
+                JLabel label = new JLabel("Professions:  " + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("name") +
                         " [" + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(0).get("rank") + "] " + ", "
                         + obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("name") + " [" +
-                        obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank") + "]"));
+                        obj.getJSONObject("professions").getJSONArray("primary").getJSONObject(1).get("rank") + "]");
+                label.setFont(new Font("times new roman", Font.PLAIN, 10));
+                add(label);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +100,9 @@ public class PlayerProfile extends JPanel {
     public void getLevel(String character, String realm) {
         try {
             JSONObject obj = getURL(character, realm);
-            add(new JLabel("Level: " + obj.get("level")));
+            JLabel label = new JLabel("Level: " + obj.get("level"));
+            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            add(label);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,7 +126,9 @@ public class PlayerProfile extends JPanel {
             classMap.put(9, "Warlock");
             classMap.put(10, "Monk");
             classMap.put(11, "Druid");
-            add(new JLabel("Class: " + classMap.get(obj.get("class"))));
+            JLabel label = new JLabel("Class: " + classMap.get(obj.get("class")));
+            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            add(label);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,7 +138,9 @@ public class PlayerProfile extends JPanel {
         try {
             JSONObject obj = getURL(character, realm);
             JSONObject items = obj.getJSONObject("items");
-            add(new JLabel("Item level: " + items.get("averageItemLevel") + " (" + items.get("averageItemLevelEquipped") + " equipped" + ")"));
+            JLabel label = new JLabel("Item level: " + items.get("averageItemLevel") + " (" + items.get("averageItemLevelEquipped") + " equipped" + ")");
+            label.setFont(new Font("times new roman", Font.PLAIN, 10));
+            add(label);
         } catch (Exception e) {
             e.printStackTrace();
         }
