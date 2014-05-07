@@ -46,7 +46,7 @@ import org.json.JSONObject;
  * Created by Jacke on 2014-04-29.
  */
 public class MainFrame{
-    private static ArrayList<String> characters = new ArrayList<String>();
+    private static HashMap<String, String> characters = new HashMap<String, String>();
     private static HashMap<String, Integer> itemLevel = new HashMap<String, Integer>();
     public MainFrame(){
     }
@@ -134,6 +134,7 @@ public class MainFrame{
                 itemLevel.clear();
                 // Call avgItemLevelGroup with empty hashmap
                 groupPanel.avgItemLevelGroup(itemLevel);
+                groupPanel.tierUsers(characters); //...and the tierUsers
                 // Add the empty hashmap to groupWindow
                 groupWindow.add(groupPanel, BorderLayout.CENTER);
                 // Clear listpanel and repaint
@@ -168,12 +169,12 @@ public class MainFrame{
                 JSONObject obj = characterPanel.getURL(textFieldCharacter.getText(), realms.getSelectedItem().toString());
 
                 // If there are no duplicates and both character name and realm are valid, proceed to button creation
-                if (!textFieldCharacter.getText().equals("") && obj != null && !characters.contains(textFieldCharacter.getText().toLowerCase())){
+                if (!textFieldCharacter.getText().equals("") && obj != null && !characters.containsKey(textFieldCharacter.getText().toLowerCase())){
 
                     // Add the character name to an arraylist to keep track of duplicates
                     String name = textFieldCharacter.getText().toLowerCase();
                     final String nameDummy = name;
-                    characters.add(nameDummy);
+                    characters.put(nameDummy, characterPanel.wowClass());
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 
                     // Create profile button
@@ -189,6 +190,7 @@ public class MainFrame{
                     groupPanel.removeAll();
                     itemLevel.put(nameDummy, characterPanel.itemLevelValue()); // Add player and the corresponding ilvl to a hashmap
                     groupPanel.avgItemLevelGroup(itemLevel); // Call the avgItem
+                    groupPanel.tierUsers(characters); //...and the tierUsers
                     groupWindow.add(groupPanel, BorderLayout.CENTER);
 
                     // Modify settings for profile button and add the remove button to it
@@ -320,6 +322,7 @@ public class MainFrame{
                             characters.remove(nameDummy); // Remove character from duplicate check
                             itemLevel.remove(nameDummy); // Remove character from average item level hashmap
                             groupPanel.avgItemLevelGroup(itemLevel);
+                            groupPanel.tierUsers(characters);
                             groupWindow.add(groupPanel, BorderLayout.CENTER);
                             listPanel.remove(profileButton);
                             frame.validate();

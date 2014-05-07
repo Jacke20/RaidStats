@@ -39,7 +39,7 @@ public class TextReader {
 		fileName = "roster.txt";
 	}
 	
-	public void search(final ArrayList<String> characters, 
+	public void search(final HashMap<String, String> characters, 
 							   final GroupPanel groupPanel,
 							   final HashMap<String, 
 							   Integer> itemLevel,
@@ -57,12 +57,12 @@ public class TextReader {
 		            	String[] s = line.split("-");
 		            	System.out.println("Adding " + s[0] + " - " + s[1]);
 		            	JSONObject obj = p.getURL(s[0], s[1]);
-		            	if (!s[0].equals("") && obj != null && !characters.contains(s[0].toLowerCase())) {
+		            	if (!s[0].equals("") && obj != null && !characters.containsKey((s[0].toLowerCase()))) {
 		                    // Create button with characters name and modify text-icon relation.
 
 		                    String name = s[0].toLowerCase();
 		                    final String nameDummy = name;
-		                    characters.add(nameDummy);
+		                    characters.put(nameDummy, p.wowClass());
 		                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 		                    final JPanel button = new JPanel(new BorderLayout());
 		                    final JPanel buttonCross = new JPanel(new FlowLayout());
@@ -73,6 +73,7 @@ public class TextReader {
 		                    groupPanel.removeAll();
 		                    itemLevel.put(nameDummy, p.itemLevelValue());
 		                    groupPanel.avgItemLevelGroup(itemLevel);
+		                    groupPanel.tierUsers(characters); //...and the tierUsers
 		                    groupWindow.add(groupPanel, BorderLayout.CENTER);
 
 		                    button.add(nameL, BorderLayout.CENTER);
@@ -200,6 +201,7 @@ public class TextReader {
 		                            groupPanel.removeAll();
 		                            itemLevel.remove(nameDummy);
 		                            groupPanel.avgItemLevelGroup(itemLevel);
+		                            groupPanel.tierUsers(characters);
 		                            groupWindow.add(groupPanel, BorderLayout.CENTER);
 		                            listPanel.remove(button);
 		                            frame.validate();
