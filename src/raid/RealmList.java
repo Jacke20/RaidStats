@@ -3,6 +3,7 @@ package raid;
 import javax.swing.*;
 
 /**
+ * This Class holds the names of all Europe wow realms and are externally added to a JComboBox in MainFrame.
  * Created by Jacke on 2014-05-06.
  */
 public class RealmList{

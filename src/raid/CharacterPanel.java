@@ -16,31 +16,21 @@ import org.json.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-public class PlayerProfile extends JPanel {
+/**
+ * This class holds a panel with character information. The panel is externally added to MainFrame to display the
+ * information that the panel holds.
+ */
+public class CharacterPanel extends JPanel {
     private JSONObject object;
 
-    public PlayerProfile() {
-
-        /*JButton backButton = new JButton("\u22b2Back");
-        backButton.addActionListener(new ActionListener() {
-                                         @Override
-                                         public void actionPerformed(ActionEvent e) {
-                                             removeAll();
-                                             setBorder(null);
-                                             setLayout(new BorderLayout());
-                                             add(topPanel, BorderLayout.NORTH);
-                                             add(scrollPane, BorderLayout.CENTER);
-                                             validate();
-                                             repaint();
-                                         }
-                                     }
-        );*/
-        //add(backButton);
+    public CharacterPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        //setBorder(BorderFactory.createTitledBorder(null, "Character information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
         setPreferredSize(new Dimension(300, 200));
     }
 
+    /**
+     * Reads from wow api and returns a JSONObject.
+     */
     public JSONObject getURL(String character, String realm) {
         String characterName = character;
         String realmName = realm.replaceAll(" ", "%20");
@@ -62,7 +52,10 @@ public class PlayerProfile extends JPanel {
         return object;
     }
 
-    public void getPlayerName() {
+    /**
+     * Add characters name to JLabel.
+     */
+    public void getCharacterName() {
         try {
             JLabel label = new JLabel("Player name: " + name());
             label.setFont(new Font("times new roman", Font.PLAIN, 11));
@@ -72,6 +65,9 @@ public class PlayerProfile extends JPanel {
         }
     }
 
+    /**
+     * Get characters professions and add to JLabel.
+     */
     public void getProfessions() {
         try {
             if (object.getJSONObject("professions").getJSONArray("primary").length() == 0) {
@@ -97,6 +93,9 @@ public class PlayerProfile extends JPanel {
         }
     }
 
+    /**
+     * Get characters level and add to JLabel.
+     */
     public void getLevel() {
         try {
             JLabel label = new JLabel("Level: " + object.get("level"));
@@ -108,7 +107,7 @@ public class PlayerProfile extends JPanel {
     }
 
     /**
-     * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
+     * Add characters class to new JLabel.
      */
     public void getCharacterClass() {
         try {
@@ -119,7 +118,10 @@ public class PlayerProfile extends JPanel {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Add characters item level to a new JLabel.
+     */
     public void getItemLevel() {
         try {
             JLabel label = new JLabel("Item level: " + itemLevelValue() + " (" + iLvlEquipped() + " equipped" + ")");
@@ -129,6 +131,10 @@ public class PlayerProfile extends JPanel {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Get characters item level.
+     */
     public int itemLevelValue() {
         try {
             String val = object.getJSONObject("items").get("averageItemLevel").toString();
@@ -138,7 +144,10 @@ public class PlayerProfile extends JPanel {
         }
         return 0;
     }
-    
+
+    /**
+     * Get characters item level equipped.
+     */
     public String iLvlEquipped(){
     	try {
 			return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
@@ -148,7 +157,10 @@ public class PlayerProfile extends JPanel {
 		return null;
 
     }
-    
+
+    /**
+     * Get character name.
+     */
     public String name(){
     	try {
 			return object.get("name").toString();
@@ -158,7 +170,11 @@ public class PlayerProfile extends JPanel {
 		return null;
 
     }
-    
+
+    /**
+     * Get characters class. Values below are numbers that correspond to specified class in JSONObject.
+     * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
+     */
     public String wowClass(){
     	try {
     		HashMap<Integer, String> classMap = new HashMap<Integer, String>();
