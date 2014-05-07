@@ -9,15 +9,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Created by Jacke on 2014-05-06.
+ * This class holds a panel with group information. The panel is externally added to MainFrame to display the
+ * information that the panel holds.
  */
-public class GroupInfo extends JPanel {
-	public GroupInfo() {
+public class GroupPanel extends JPanel {
+	public GroupPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setPreferredSize(new Dimension(300, 200));
 	}
 
-	public void itemLevelGroup(HashMap<String, Integer> itemLevel) {
+	public void avgItemLevelGroup(HashMap<String, Integer> itemLevel) {
 		int value = 0;
 		if (itemLevel.isEmpty()) {
 			//do nothing
