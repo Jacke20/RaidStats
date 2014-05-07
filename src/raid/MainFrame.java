@@ -54,16 +54,47 @@ public class MainFrame{
         final JFrame frame = new JFrame("RaidAssister");
         final JPanel topPanel = new JPanel();
 <<<<<<< HEAD
+<<<<<<< HEAD
         final JPanel listPanel = new ListPanel();
 
         // Create components
         final JButton addPlayerButton = new JButton("Add character");
         final JButton secretButton = new JButton("Read from file");
         final JTextField textFieldPlayer = new JTextField(10);
+=======
+        final JPanel listPanel = new JPanel();
+        final JPanel charWindow = new JPanel();
+        final JPanel groupWindow = new JPanel();
+
+        // Add a menu bar
+        final JMenuBar menu = new JMenuBar();
+        final JMenuItem menuItem = new JMenuItem("Clear");
+
+        // Modify panel settings
+        charWindow.setLayout(new BorderLayout());
+        charWindow.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        charWindow.setPreferredSize(new Dimension(320, 200));
+        groupWindow.setLayout(new BorderLayout());
+        groupWindow.setBorder(BorderFactory.createTitledBorder(null, "Group Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        groupWindow.setPreferredSize(new Dimension(320, 200));
+        // Set layout and panel settings for listPanel
+        GridLayout g = new GridLayout(5, 5);
+        g.setHgap(5);
+        g.setVgap(5);
+        listPanel.setLayout(g);
+        listPanel.setBorder(BorderFactory.createTitledBorder(null, "Added characters", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
+        listPanel.setForeground(Color.WHITE);
+        listPanel.setPreferredSize(new Dimension(400, 300));
+
+        // Create components
+        final JButton addPlayerButton = new JButton("Add character");
+        final JTextField textFieldCharacter = new JTextField(10);
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
         final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
         final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
         final JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
+<<<<<<< HEAD
         final JPanel charPanel = new JPanel();
         charPanel.setLayout(new BorderLayout());
         charPanel.setBorder(BorderFactory.createTitledBorder(null, "Character Information", TitledBorder.TOP, TitledBorder.TOP, new Font("times new roman", Font.PLAIN, 12), Color.BLACK));
@@ -106,6 +137,9 @@ public class MainFrame{
         final JComboBox<String> realms = new JComboBox<String>(realmList.getRealm());
         final JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
 
+=======
+
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
         // Modify frame settings
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         frame.setJMenuBar(menu);
@@ -119,6 +153,7 @@ public class MainFrame{
         topPanel.add(realms);
         topPanel.add(addPlayerButton);
 <<<<<<< HEAD
+<<<<<<< HEAD
         topPanel.add(secretButton);
         bottomPanel.add(charPanel);
         bottomPanel.add(grpPanel);
@@ -126,6 +161,10 @@ public class MainFrame{
         bottomPanel.add(charWindow);
         bottomPanel.add(groupWindow);
 >>>>>>> branch 'master' of https://github.com/Jacke20/RaidStats.git
+=======
+        bottomPanel.add(charWindow);
+        bottomPanel.add(groupWindow);
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
         menu.add(menuItem);
 
         // Add panels to content pane and set the program to use the menu created
@@ -154,6 +193,7 @@ public class MainFrame{
             }
         });
 
+<<<<<<< HEAD
         secretButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -168,10 +208,13 @@ public class MainFrame{
 			}
 		});
         
+=======
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
         // Implement actions.
         addPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
 <<<<<<< HEAD
                 final PlayerProfile p = new PlayerProfile();
                 
@@ -188,6 +231,13 @@ public class MainFrame{
                 // If there are no duplicates and both character name and realm are valid, proceed to button creation
                 if (!textFieldCharacter.getText().equals("") && obj != null && !characters.contains(textFieldCharacter.getText().toLowerCase())){
 >>>>>>> branch 'master' of https://github.com/Jacke20/RaidStats.git
+=======
+                final CharacterPanel characterPanel = new CharacterPanel();
+                JSONObject obj = characterPanel.getURL(textFieldCharacter.getText(), realms.getSelectedItem().toString());
+
+                // If there are no duplicates and both character name and realm are valid, proceed to button creation
+                if (!textFieldCharacter.getText().equals("") && obj != null && !characters.contains(textFieldCharacter.getText().toLowerCase())){
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
 
                     // Add the character name to an arraylist to keep track of duplicates
                     String name = textFieldCharacter.getText().toLowerCase();
@@ -211,6 +261,7 @@ public class MainFrame{
                     groupWindow.add(groupPanel, BorderLayout.CENTER);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     button.add(nameL, BorderLayout.CENTER);
                     button.setToolTipText("Click to open profile!");
                     button.setBorder(new EmptyBorder(0, 10, 0, 0));
@@ -219,6 +270,11 @@ public class MainFrame{
                     profileButton.add(nameL, BorderLayout.CENTER);
                     profileButton.setToolTipText("Click to open profile!");
 >>>>>>> branch 'master' of https://github.com/Jacke20/RaidStats.git
+=======
+                    // Modify settings for profile button and add the remove button to it
+                    profileButton.add(nameL, BorderLayout.CENTER);
+                    profileButton.setToolTipText("Click to open profile!");
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
                     rButton.setIcon(new ImageIcon("images/cross.png"));
                     rButton.setPreferredSize(new Dimension(16, 16));
                     rButton.setOpaque(false);
@@ -226,11 +282,16 @@ public class MainFrame{
                     rButton.setBorderPainted(false);
                     buttonCross.add(rButton);
 <<<<<<< HEAD
+<<<<<<< HEAD
                     button.add(buttonCross, BorderLayout.EAST);
 =======
                     profileButton.add(buttonCross, BorderLayout.EAST);
                     profileButton.setBorder(new EmptyBorder(0, 10, 0, 0));
 >>>>>>> branch 'master' of https://github.com/Jacke20/RaidStats.git
+=======
+                    profileButton.add(buttonCross, BorderLayout.EAST);
+                    profileButton.setBorder(new EmptyBorder(0, 10, 0, 0));
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
                     buttonCross.setOpaque(false);
 
                     // Retrieve player and realm values from text fields.
@@ -362,8 +423,11 @@ public class MainFrame{
                     frame.repaint();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                     //JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
 =======
+=======
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
                     // Success popup
                     JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
 >>>>>>> branch 'master' of https://github.com/Jacke20/RaidStats.git
@@ -397,12 +461,17 @@ public class MainFrame{
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 <<<<<<< HEAD
+<<<<<<< HEAD
         frame.setSize(572, 701);
         //frame.setResizable(false);
 =======
         frame.setSize(572, 630);
         frame.setResizable(false);
 >>>>>>> bedc120d038a4bb4f8e1edde8c7e428e04e440a0
+=======
+        frame.setSize(572, 630);
+        frame.setResizable(false);
+>>>>>>> d96785d09d14c875b03271d450ee8418be41c0e5
         frame.setLocation(350, 50);
         frame.setVisible(true);
     }
