@@ -39,13 +39,13 @@ public class TextReader {
 		fileName = "roster.txt";
 	}
 	
-	public void search(final ArrayList<String> players, 
-							   final GroupPanel groupInfo,
+	public void search(final ArrayList<String> characters, 
+							   final GroupPanel groupPanel,
 							   final HashMap<String, 
 							   Integer> itemLevel,
-							   final JPanel grpPanel,
+							   final JPanel groupWindow,
 							   final JPanel listPanel,
-							   final JPanel charPanel,
+							   final JPanel charWindow,
 							   final JFrame frame)
 		    throws IOException {
 			BufferedReader file = new BufferedReader(
@@ -57,12 +57,12 @@ public class TextReader {
 		            	String[] s = line.split("-");
 		            	System.out.println("Adding " + s[0] + " - " + s[1]);
 		            	JSONObject obj = p.getURL(s[0], s[1]);
-		            	if (!s[0].equals("") && obj != null && !players.contains(s[0].toLowerCase())) {
-		                    // Create button with players name and modify text-icon relation.
+		            	if (!s[0].equals("") && obj != null && !characters.contains(s[0].toLowerCase())) {
+		                    // Create button with characters name and modify text-icon relation.
 
 		                    String name = s[0].toLowerCase();
 		                    final String nameDummy = name;
-		                    players.add(nameDummy);
+		                    characters.add(nameDummy);
 		                    name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 		                    final JPanel button = new JPanel(new BorderLayout());
 		                    final JPanel buttonCross = new JPanel(new FlowLayout());
@@ -70,10 +70,10 @@ public class TextReader {
 		                    final JLabel nameL = new JLabel(name, JLabel.CENTER);
 		                    
 		                 // Update group panel
-		                    groupInfo.removeAll();
+		                    groupPanel.removeAll();
 		                    itemLevel.put(nameDummy, p.itemLevelValue());
-		                    groupInfo.avgItemLevelGroup(itemLevel);
-		                    grpPanel.add(groupInfo, BorderLayout.CENTER);
+		                    groupPanel.avgItemLevelGroup(itemLevel);
+		                    groupWindow.add(groupPanel, BorderLayout.CENTER);
 
 		                    button.add(nameL, BorderLayout.CENTER);
 		                    button.setToolTipText("Click to open profile!");
@@ -196,11 +196,11 @@ public class TextReader {
 
 		                        @Override
 		                        public void actionPerformed(ActionEvent e) {
-		                            players.remove(nameDummy);
-		                            groupInfo.removeAll();
+		                            characters.remove(nameDummy);
+		                            groupPanel.removeAll();
 		                            itemLevel.remove(nameDummy);
-		                            groupInfo.avgItemLevelGroup(itemLevel);
-		                            grpPanel.add(groupInfo, BorderLayout.CENTER);
+		                            groupPanel.avgItemLevelGroup(itemLevel);
+		                            groupWindow.add(groupPanel, BorderLayout.CENTER);
 		                            listPanel.remove(button);
 		                            frame.validate();
 		                            frame.repaint();
@@ -225,8 +225,8 @@ public class TextReader {
 		                            p.getProfessions();
 		                            p.getItemLevel();
 		                            //frame.getContentPane().removeAll();
-		                            charPanel.removeAll();
-		                            charPanel.add(p, BorderLayout.CENTER);
+		                            charWindow.removeAll();
+		                            charWindow.add(p, BorderLayout.CENTER);
 		                            frame.validate();
 		                            frame.repaint();
 		                        }

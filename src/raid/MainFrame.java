@@ -1,17 +1,33 @@
 package raid;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -77,6 +93,7 @@ public class MainFrame{
 
         // Create components
         final JButton addCharacterButton = new JButton("Add character");
+        final JButton rFileButton = new JButton("Read from file...");
         final JTextField textFieldCharacter = new JTextField(10);
         final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
@@ -95,6 +112,7 @@ public class MainFrame{
         topPanel.add(realmTag);
         topPanel.add(realms);
         topPanel.add(addCharacterButton);
+        topPanel.add(rFileButton);
         bottomPanel.add(charWindow);
         bottomPanel.add(groupWindow);
         menu.add(menuItem);
@@ -125,6 +143,23 @@ public class MainFrame{
             }
         });
 
+        //Implement actions for read from file button
+        rFileButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TextReader tr = new TextReader();
+				
+				try {
+					tr.search(characters, groupPanel, itemLevel, groupWindow, listPanel, charWindow, frame);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+        
         // Implement actions.
         addCharacterButton.addActionListener(new ActionListener() {
             @Override
@@ -329,7 +364,7 @@ public class MainFrame{
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(572, 630);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setLocation(350, 50);
         frame.setVisible(true);
     }
