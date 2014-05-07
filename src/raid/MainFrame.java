@@ -363,7 +363,7 @@ public class MainFrame{
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(572, 630);
+        frame.setSize(660, 630);
         frame.setResizable(true);
         frame.setLocation(350, 50);
         frame.setVisible(true);

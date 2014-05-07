@@ -57,8 +57,7 @@ public class TextReader {
 		            	String[] s = line.split("-");
 		            	System.out.println("Adding " + s[0] + " - " + s[1]);
 		            	JSONObject obj = p.getURL(s[0], s[1]);
-		            	if (!s[0].equals("") && obj != null && !characters.contains(s[0].toLowerCase())) {
-		                    // Create button with characters name and modify text-icon relation.
+		            	if (!s[0].equals("") && obj != null && !characters.contains(s[0].toLowerCase())){
 
 		                    String name = s[0].toLowerCase();
 		                    final String nameDummy = name;
