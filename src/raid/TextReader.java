@@ -55,7 +55,7 @@ public class TextReader {
 		            if (line.matches("\\D*\\w*-\\w*\\s\\w*")) {
 		            	final String[] s = line.split("-");
 		            	System.out.println("Adding " + s[0] + " - " + s[1]);
-				        CharacterPanel p = new CharacterPanel(s[0]);
+				        CharacterPanel p = new CharacterPanel(s[0].toLowerCase());
 		            	JSONObject obj = p.getURL(s[0], s[1]);
 		            	if (!s[0].equals("") && obj != null && !characters.containsKey((s[0].toLowerCase()))) {
 		                    // Create button with characters name and modify text-icon relation.
@@ -197,15 +197,27 @@ public class TextReader {
 
 		                        @Override
 		                        public void actionPerformed(ActionEvent e) {
-		                            characters.remove(nameDummy);
-		                            groupPanel.removeAll();
-		                            itemLevel.remove(nameDummy);
-		                            groupPanel.avgItemLevelGroup(itemLevel);
-		                            groupPanel.tierUsers(characters);
-		                            groupWindow.add(groupPanel, BorderLayout.CENTER);
-		                            listPanel.remove(button);
-		                            frame.validate();
-		                            frame.repaint();
+		                        	groupPanel.removeAll();
+									characters.remove(nameDummy); // Remove character
+																	// from duplicate
+																	// check
+									itemLevel.remove(nameDummy); // Remove character
+																	// from average item
+																	// level hashmap
+									groupPanel.avgItemLevelGroup(itemLevel);
+									groupPanel.tierUsers(characters);
+									groupWindow.add(groupPanel, BorderLayout.CENTER);
+									// If charWindow is currently showing info about the
+									// character about to be deleted, clear the window
+									if (charWindow.getComponentCount() != 0) {
+										if (nameDummy.equals(charWindow.getComponent(0)
+												.getName())) {
+											charWindow.removeAll();
+										}
+									}
+									listPanel.remove(button);
+									frame.validate();
+									frame.repaint();
 		                        }
 		                    });
 
@@ -218,7 +230,7 @@ public class TextReader {
 		                    button.addMouseListener(new MouseInputAdapter() {
 		                        @Override
 		                        public void mouseClicked(MouseEvent e) {
-		                            final CharacterPanel p = new CharacterPanel(s[0]);
+		                            final CharacterPanel p = new CharacterPanel(s[0].toLowerCase());
 
 		                            p.getURL(player, realm);
 		                            p.getCharacterName();
