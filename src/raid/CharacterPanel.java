@@ -23,9 +23,10 @@ import javax.swing.border.TitledBorder;
 public class CharacterPanel extends JPanel {
     private JSONObject object;
 
-    public CharacterPanel() {
+    public CharacterPanel(String name) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 200));
+        setName(name);
     }
 
     /**

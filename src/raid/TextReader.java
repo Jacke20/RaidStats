@@ -51,11 +51,11 @@ public class TextReader {
 			BufferedReader file = new BufferedReader(
 				    new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
 		        String line;
-		        CharacterPanel p = new CharacterPanel();
 		        while ((line = file.readLine()) != null) {
 		            if (line.matches("\\D*\\w*-\\w*\\s\\w*")) {
-		            	String[] s = line.split("-");
+		            	final String[] s = line.split("-");
 		            	System.out.println("Adding " + s[0] + " - " + s[1]);
+				        CharacterPanel p = new CharacterPanel(s[0]);
 		            	JSONObject obj = p.getURL(s[0], s[1]);
 		            	if (!s[0].equals("") && obj != null && !characters.containsKey((s[0].toLowerCase()))) {
 		                    // Create button with characters name and modify text-icon relation.
@@ -218,7 +218,7 @@ public class TextReader {
 		                    button.addMouseListener(new MouseInputAdapter() {
 		                        @Override
 		                        public void mouseClicked(MouseEvent e) {
-		                            final CharacterPanel p = new CharacterPanel();
+		                            final CharacterPanel p = new CharacterPanel(s[0]);
 
 		                            p.getURL(player, realm);
 		                            p.getCharacterName();
