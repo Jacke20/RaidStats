@@ -76,7 +76,7 @@ public class MainFrame{
         listPanel.setPreferredSize(new Dimension(400, 300));
 
         // Create components
-        final JButton addPlayerButton = new JButton("Add character");
+        final JButton addCharacterButton = new JButton("Add character");
         final JTextField textFieldCharacter = new JTextField(10);
         final JLabel characterTag = new JLabel("Character:");
         final JLabel realmTag = new JLabel("Realm:");
@@ -87,14 +87,14 @@ public class MainFrame{
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
         frame.setJMenuBar(menu);
         // Set addPlayerButton as the default button to listen to enter.
-        frame.getRootPane().setDefaultButton(addPlayerButton);
+        frame.getRootPane().setDefaultButton(addCharacterButton);
 
         // Add components to panels and menu
         topPanel.add(characterTag);
         topPanel.add(textFieldCharacter);
         topPanel.add(realmTag);
         topPanel.add(realms);
-        topPanel.add(addPlayerButton);
+        topPanel.add(addCharacterButton);
         bottomPanel.add(charWindow);
         bottomPanel.add(groupWindow);
         menu.add(menuItem);
@@ -126,7 +126,7 @@ public class MainFrame{
         });
 
         // Implement actions.
-        addPlayerButton.addActionListener(new ActionListener() {
+        addCharacterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 final CharacterPanel characterPanel = new CharacterPanel();
