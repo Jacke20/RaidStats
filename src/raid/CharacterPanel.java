@@ -26,6 +26,7 @@ public class CharacterPanel extends JPanel {
     private JSONObject obj;
     private HashMap<String, String> items = new HashMap<String, String>();
     private HashMap<String, Integer> numberOfSockets = new HashMap<String, Integer>();
+    private ArrayList<String> unsocketedItems = new ArrayList<String>();
     public CharacterPanel(String name) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 200));
@@ -190,13 +191,13 @@ public class CharacterPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
     	    }
     	label.addMouseListener(new OpenUrlAction());
@@ -299,6 +300,9 @@ public class CharacterPanel extends JPanel {
                 JLabel label = new JLabel("Fully gemmed: No");
                 label.setFont(new Font("times new roman", Font.PLAIN, 11));
                 add(label);
+                JLabel label2 = new JLabel("Unsocketed items: " + unsocketedItems);
+                label2.setFont(new Font("times new roman", Font.PLAIN, 11));
+                add(label2);
                 return;
             }
         }
@@ -323,6 +327,7 @@ public class CharacterPanel extends JPanel {
                        hasSockets.add(true);
                    }else{
                        hasSockets.add(false);
+                       unsocketedItems.add(pairs.getKey().toString());
                    }
                }
            }catch(Exception e){
