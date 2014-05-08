@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -103,7 +102,7 @@ public class MainFrame {
         final JPanel bottomPanel = new JPanel(new GridLayout(1, 2));
 
         // Modify frame settings
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")));
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("wow.png")).getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH));
         frame.setJMenuBar(menu);
         // Set addPlayerButton as the default button to listen to enter.
         frame.getRootPane().setDefaultButton(addCharacterButton);
