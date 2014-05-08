@@ -411,16 +411,16 @@ public class MainFrame {
 						public void actionPerformed(ActionEvent e) {
 							groupPanel.removeAll();
 							characters.remove(nameDummy); // Remove character
-															// from duplicate
-															// check
-							itemLevel.remove(nameDummy); // Remove character
-															// from average item
-															// level hashmap
+														  // from duplicate
+														  // check
+							itemLevel.remove(nameDummy);  // Remove character
+														  // from average item
+														  // level hashmap
 							groupPanel.avgItemLevelGroup(itemLevel);
 							groupPanel.tierUsers(characters);
 							groupWindow.add(groupPanel, BorderLayout.CENTER);
-							// If charWindow is currently showing info about the
-							// character about to be deleted, clear the window
+							//If charWindow is currently showing info about the
+							//character about to be deleted, clear the window
 							if (charWindow.getComponentCount() != 0) {
 								if (nameDummy.equals(charWindow.getComponent(0)
 										.getName())) {
