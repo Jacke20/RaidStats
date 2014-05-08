@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
@@ -356,6 +357,12 @@ public class MainFrame {
                             characterPanel.getItemLevel();
                             characterPanel.getAchievementPoints();
                             characterPanel.checkGems();
+                            try {
+								characterPanel.getArmoryLink(player, realm);
+							} catch (URISyntaxException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
                             charWindow.removeAll();
                             charWindow.add(characterPanel, BorderLayout.CENTER);
                             frame.validate();

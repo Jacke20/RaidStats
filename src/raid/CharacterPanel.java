@@ -3,13 +3,14 @@ package raid;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 
 import org.json.*;
 
@@ -161,6 +162,55 @@ public class CharacterPanel extends JPanel {
             e.printStackTrace();
         }
     }
+    
+    public void getArmoryLink(String character, String realm) throws URISyntaxException {
+        String characterName = character;
+        String realmName = realm.replaceAll(" ", "-");
+    	final URI uri = new URI("http://eu.battle.net/wow/en/character/" + realmName + "/" + characterName + "/advanced");
+    	final JLabel label = new JLabel();
+        label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
+        label.setToolTipText(uri.toString());
+    	class OpenUrlAction implements MouseListener {
+    	      @Override public void mouseClicked(MouseEvent e) {
+    	        open(uri);
+    	      }
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\"><U>Armory link</U></FONT></HTML>");
+				setCursor(new Cursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
+				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+    	    }
+    	label.addMouseListener(new OpenUrlAction());
+        add(label);
+    }
+    
+    private static void open(URI uri) {
+        if (Desktop.isDesktopSupported()) {
+          try {
+            Desktop.getDesktop().browse(uri);
+          } catch (IOException e) { /* TODO: error handling */ }
+        } else { /* TODO: error handling */ }
+      }
+    
     /**
      * Get characters item level.
      */
