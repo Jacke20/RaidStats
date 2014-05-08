@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
-
-
-
+import java.util.Iterator;
+import java.util.Map;
 
 
 import org.json.*;
@@ -22,10 +22,13 @@ import javax.swing.border.TitledBorder;
  */
 public class CharacterPanel extends JPanel {
     private JSONObject object;
-
-    public CharacterPanel() {
+    private JSONObject obj;
+    private HashMap<String, String> items = new HashMap<String, String>();
+    private HashMap<String, Integer> numberOfSockets = new HashMap<String, Integer>();
+    public CharacterPanel(String name) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 200));
+        setName(name);
     }
 
     /**
@@ -36,8 +39,7 @@ public class CharacterPanel extends JPanel {
         String realmName = realm.replaceAll(" ", "%20");
         try {
             URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + characterName + "?fields=items,professions");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(profile.openStream(), "UTF-8"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(profile.openStream(), "UTF-8"));
 
             String inputLine;
             String json = "";
@@ -50,6 +52,24 @@ public class CharacterPanel extends JPanel {
         } catch (Exception e) {
         }
         return object;
+    }
+
+    public JSONObject getItemAPI(String id) {
+        try {
+            URL profile = new URL("http://eu.battle.net/api/wow/item/" + id);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(profile.openStream(), "UTF-8"));
+
+            String inputLine;
+            String json = "";
+            while ((inputLine = in.readLine()) != null) {
+                json = inputLine + json;
+            }
+            in.close();
+            obj = new JSONObject(json);
+        } catch (Exception e) {
+        }
+        return obj;
     }
 
     /**
@@ -132,6 +152,15 @@ public class CharacterPanel extends JPanel {
         }
     }
 
+    public void getAchievementPoints(){
+        try{
+            JLabel label = new JLabel("Achievement points: " + object.get("achievementPoints"));
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(label);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /**
      * Get characters item level.
      */
@@ -149,12 +178,12 @@ public class CharacterPanel extends JPanel {
      * Get characters item level equipped.
      */
     public String iLvlEquipped(){
-    	try {
-			return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return null;
+        try {
+            return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
@@ -162,12 +191,12 @@ public class CharacterPanel extends JPanel {
      * Get character name.
      */
     public String name(){
-    	try {
-			return object.get("name").toString();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return null;
+        try {
+            return object.get("name").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
@@ -176,8 +205,8 @@ public class CharacterPanel extends JPanel {
      * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
      */
     public String wowClass(){
-    	try {
-    		HashMap<Integer, String> classMap = new HashMap<Integer, String>();
+        try {
+            HashMap<Integer, String> classMap = new HashMap<Integer, String>();
             classMap.put(1, "Warrior");
             classMap.put(2, "Paladin");
             classMap.put(3, "Hunter");
@@ -189,11 +218,138 @@ public class CharacterPanel extends JPanel {
             classMap.put(9, "Warlock");
             classMap.put(10, "Monk");
             classMap.put(11, "Druid");
-       
+
             return classMap.get(object.get("class"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return null;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Check if the arraylist returned from getSocketsArray() is filled with true only.
+     * If it is, character if fully gemmed, else the character is not fully gemmed.
+     */
+    public void checkGems(){
+        fillItems();
+        getNumberOfSockets();
+        ArrayList list = getSocketsArray();
+        for (int i = 0; i < list.size(); i++){
+            boolean hasGem = ((Boolean) list.get(i)).booleanValue();
+            if (!hasGem){
+                JLabel label = new JLabel("Fully gemmed: No");
+                label.setFont(new Font("times new roman", Font.PLAIN, 11));
+                add(label);
+                return;
+            }
+        }
+        JLabel label = new JLabel("Fully gemmed: Yes");
+        label.setFont(new Font("times new roman", Font.PLAIN, 11));
+        add(label);
+    }
+
+    /**
+     * Go through the gem slots for each of the characters items if there are any and fill an arraylist with true if the
+     * slots are filled, else fill it with false.
+     * @return the arraylist that holds true or false values
+     */
+   private ArrayList getSocketsArray(){
+       Iterator it = numberOfSockets.entrySet().iterator();
+       ArrayList <Boolean> hasSockets = new ArrayList<Boolean>();
+       while (it.hasNext()) {
+           Map.Entry pairs = (Map.Entry) it.next();
+           try {
+               for(int i = 0; i < Integer.parseInt(pairs.getValue().toString()); i ++){ // Go through each gem slot
+                   if(object.getJSONObject("items").getJSONObject(pairs.getKey().toString()).getJSONObject("tooltipParams").has("gem" + i)){ // Check if there is a gem
+                       hasSockets.add(true);
+                   }else{
+                       hasSockets.add(false);
+                   }
+               }
+           }catch(Exception e){
+               e.printStackTrace();
+           }
+       }
+       return hasSockets;
+    }
+
+    /**
+     * Goes through the items ids with the wow item api to find out how many sockets they can hold.
+     */
+    private void getNumberOfSockets() {
+        Iterator it = items.entrySet().iterator();
+        while (it.hasNext()) {
+            int socketCounter = 0;
+            Map.Entry pairs = (Map.Entry) it.next();
+            try {
+                obj = getItemAPI(pairs.getValue().toString());
+                if (obj.getBoolean("hasSockets")){
+                for (int i = 0; i < 4; i++) {
+                     if(!obj.getJSONObject("socketInfo").getJSONArray("sockets").isNull(i)) {
+                        socketCounter ++;
+                    }
+                }
+                numberOfSockets.put(pairs.getKey().toString(), socketCounter);
+                }
+        }catch(Exception e){
+                e.printStackTrace();
+        }
+    }
+    }
+
+    /**
+     * Add characters items as keys for the items ids to a hashmap
+     */
+    private void fillItems(){
+        try {
+            if (object.getJSONObject("items").has("trinket1")){
+                items.put("trinket1", object.getJSONObject("items").getJSONObject("trinket1").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("trinket2")){
+                items.put("trinket2", object.getJSONObject("items").getJSONObject("trinket2").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("feet")){
+                items.put("feet", object.getJSONObject("items").getJSONObject("feet").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("chest")){
+                items.put("chest", object.getJSONObject("items").getJSONObject("chest").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("hands")){
+                items.put("hands", object.getJSONObject("items").getJSONObject("hands").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("back")){
+                items.put("back", object.getJSONObject("items").getJSONObject("back").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("neck")){
+                items.put("neck", object.getJSONObject("items").getJSONObject("neck").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("wrist")){
+                items.put("wrist", object.getJSONObject("items").getJSONObject("wrist").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("finger1")){
+                items.put("finger1", object.getJSONObject("items").getJSONObject("finger1").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("finger2")){
+                items.put("finger2", object.getJSONObject("items").getJSONObject("finger2").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("head")){
+                items.put("head", object.getJSONObject("items").getJSONObject("head").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("mainHand")){
+                items.put("mainHand", object.getJSONObject("items").getJSONObject("mainHand").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("legs")){
+                items.put("legs", object.getJSONObject("items").getJSONObject("legs").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("waist")){
+                items.put("waist", object.getJSONObject("items").getJSONObject("waist").get("id").toString());
+            }
+            if (object.getJSONObject("items").has("shoulder")){
+                items.put("shoulder", object.getJSONObject("items").getJSONObject("shoulder").get("id").toString());
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

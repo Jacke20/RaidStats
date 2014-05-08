@@ -2,7 +2,9 @@ package raid;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -30,6 +32,42 @@ public class GroupPanel extends JPanel {
 			JLabel label = new JLabel("Average item level: " + value);
 			label.setFont(new Font("times new roman", Font.PLAIN, 11));
 			add(label);
+		}
+	}
+	
+	public void tierUsers(HashMap<String, String> classes){
+		String[] vanqU = {
+				"Rogue", "Death Knight", "Mage", "Druid"
+		};
+		String[] protU = {
+				"Warrior", "Hunter", "Shaman", "Monk"
+		};
+		String[] conqU = {
+				"Paladin", "Priest", "Warlock"
+		};
+		int vanq = 0, prot = 0, conq = 0;
+		
+		if (classes.isEmpty()) {
+			//do nothing
+		} else {
+			for (String s : classes.values()) {
+				if(Arrays.asList(vanqU).contains(s)){
+					vanq++;
+				}else if(Arrays.asList(protU).contains(s)){
+					prot++;
+				}else if(Arrays.asList(conqU).contains(s)){
+					conq++;
+				}
+			}
+			JLabel label = new JLabel("Vanquisher: " + vanq);
+			JLabel label1 = new JLabel("Conqueror: " + conq);
+			JLabel label2 = new JLabel("Protector: " + prot);
+			label.setFont(new Font("times new roman", Font.PLAIN, 11));
+			label1.setFont(new Font("times new roman", Font.PLAIN, 11));
+			label2.setFont(new Font("times new roman", Font.PLAIN, 11));
+			add(label);
+			add(label1);
+			add(label2);
 		}
 	}
 }

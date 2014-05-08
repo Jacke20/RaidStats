@@ -40,18 +40,21 @@ import org.json.JSONObject;
 //TODO: Add more information about the whole group
 
 /**
- * This class holds the main window and its components. Allows the user to enter a player name and realm
- * for the game World of Warcraft to retrieve and display some interesting facts about their character as well as
- * some information about the profiles in relation to eachother.
- * Created by Jacke on 2014-04-29.
+ * This class holds the main window and its components. Allows the user to enter
+ * a player name and realm for the game World of Warcraft to retrieve and
+ * display some interesting facts about their character as well as some
+ * information about the profiles in relation to eachother. Created by Jacke on
+ * 2014-04-29.
  */
-public class MainFrame{
-    private static ArrayList<String> characters = new ArrayList<String>();
+public class MainFrame {
+    private static HashMap<String, String> characters = new HashMap<String, String>();
     private static HashMap<String, Integer> itemLevel = new HashMap<String, Integer>();
-    public MainFrame(){
+
+    public MainFrame() {
     }
+
     // Use Nimbus and default UI
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -60,7 +63,6 @@ public class MainFrame{
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
         }
         // Initialize panels
         final RealmList realmList = new RealmList();
@@ -128,52 +130,49 @@ public class MainFrame{
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Clear panels and lists
+                // Clear windows and lists
                 characters.clear();
-                groupPanel.removeAll();
                 itemLevel.clear();
-                // Call avgItemLevelGroup with empty hashmap
-                groupPanel.avgItemLevelGroup(itemLevel);
-                // Add the empty hashmap to groupWindow
-                groupWindow.add(groupPanel, BorderLayout.CENTER);
-                // Clear listpanel and repaint
+                groupWindow.removeAll();
+                charWindow.removeAll();
                 listPanel.removeAll();
                 frame.validate();
                 frame.repaint();
             }
         });
 
-        //Implement actions for read from file button
+        // Implement actions for read from file button
         rFileButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				TextReader tr = new TextReader();
-				
-				try {
-					tr.search(characters, groupPanel, itemLevel, groupWindow, listPanel, charWindow, frame);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-			}
-		});
-        
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextReader tr = new TextReader();
+
+                try {
+                    tr.search(characters, groupPanel, itemLevel, groupWindow, listPanel, charWindow, frame);
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+            }
+        });
+
         // Implement actions.
         addCharacterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                final CharacterPanel characterPanel = new CharacterPanel();
+                final CharacterPanel characterPanel = new CharacterPanel(textFieldCharacter.getText().toLowerCase());
                 JSONObject obj = characterPanel.getURL(textFieldCharacter.getText(), realms.getSelectedItem().toString());
 
-                // If there are no duplicates and both character name and realm are valid, proceed to button creation
-                if (!textFieldCharacter.getText().equals("") && obj != null && !characters.contains(textFieldCharacter.getText().toLowerCase())){
+                // If there are no duplicates and both character name and realm
+                // are valid, proceed to button creation
+                if (!textFieldCharacter.getText().equals("") && obj != null && !characters.containsKey(textFieldCharacter.getText().toLowerCase())) {
 
                     // Add the character name to an arraylist to keep track of duplicates
                     String name = textFieldCharacter.getText().toLowerCase();
                     final String nameDummy = name;
-                    characters.add(nameDummy);
+                    characters.put(nameDummy, characterPanel.wowClass());
                     name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 
                     // Create profile button
@@ -189,9 +188,11 @@ public class MainFrame{
                     groupPanel.removeAll();
                     itemLevel.put(nameDummy, characterPanel.itemLevelValue()); // Add player and the corresponding ilvl to a hashmap
                     groupPanel.avgItemLevelGroup(itemLevel); // Call the avgItem
+                    groupPanel.tierUsers(characters); // ...and the tierUsers
                     groupWindow.add(groupPanel, BorderLayout.CENTER);
 
-                    // Modify settings for profile button and add the remove button to it
+                    // Modify settings for profile button and add the remove
+                    // button to it
                     profileButton.add(nameL, BorderLayout.CENTER);
                     profileButton.setToolTipText("Click to open profile!");
                     rButton.setIcon(new ImageIcon("images/cross.png"));
@@ -208,8 +209,10 @@ public class MainFrame{
                     final String player = textFieldCharacter.getText();
                     final String realm = realms.getSelectedItem().toString();
 
-                    // Go through jsonobject to check which class the player is and choose icon and colour based on that.
-                    // Using default class colours from: http://www.wowwiki.com/Class_colors
+                    // Go through jsonobject to check which class the player is
+                    // and choose icon and colour based on that.
+                    // Using default class colours from:
+                    // http://www.wowwiki.com/Class_colors
                     try {
                         String playerClass = obj.get("class").toString();
                         switch (Integer.parseInt(playerClass)) {
@@ -218,28 +221,24 @@ public class MainFrame{
                                 profileButton.add(picLabelWarrior, BorderLayout.WEST);
                                 float[] colorWarrior = Color.RGBtoHSB(199, 156, 110, null);
                                 profileButton.setBackground(Color.getHSBColor(colorWarrior[0], colorWarrior[1], colorWarrior[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 2:
                                 JLabel picLabelPaladin = new JLabel(new ImageIcon("images/paladin.png"));
                                 profileButton.add(picLabelPaladin, BorderLayout.WEST);
                                 float[] colorPaladin = Color.RGBtoHSB(245, 140, 186, null);
                                 profileButton.setBackground(Color.getHSBColor(colorPaladin[0], colorPaladin[1], colorPaladin[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 3:
                                 JLabel picLabelHunter = new JLabel(new ImageIcon("images/hunter.png"));
                                 profileButton.add(picLabelHunter, BorderLayout.WEST);
                                 float[] colorHunter = Color.RGBtoHSB(171, 212, 115, null);
                                 profileButton.setBackground(Color.getHSBColor(colorHunter[0], colorHunter[1], colorHunter[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 4:
                                 JLabel picLabelRogue = new JLabel(new ImageIcon("images/rogue.png"));
                                 profileButton.add(picLabelRogue, BorderLayout.WEST);
                                 float[] colorRogue = Color.RGBtoHSB(255, 245, 105, null);
                                 profileButton.setBackground(Color.getHSBColor(colorRogue[0], colorRogue[1], colorRogue[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 5:
                                 JLabel picLabelPriest = new JLabel(new ImageIcon("images/priest.png"));
@@ -247,49 +246,42 @@ public class MainFrame{
                                 float[] colorPriest = Color.RGBtoHSB(255, 255, 255, null);
                                 profileButton.setBackground(Color.getHSBColor(colorPriest[0], colorPriest[1], colorPriest[2]));
                                 buttonCross.setBackground(Color.getHSBColor(colorPriest[0], colorPriest[1], colorPriest[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 6:
                                 JLabel picLabelDeathknight = new JLabel(new ImageIcon("images/deathknight.png"));
                                 profileButton.add(picLabelDeathknight, BorderLayout.WEST);
                                 float[] colorDeathKnight = Color.RGBtoHSB(196, 30, 59, null);
                                 profileButton.setBackground(Color.getHSBColor(colorDeathKnight[0], colorDeathKnight[1], colorDeathKnight[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 7:
                                 JLabel picLabelShaman = new JLabel(new ImageIcon("images/shaman.png"));
                                 profileButton.add(picLabelShaman, BorderLayout.WEST);
                                 float[] colorShaman = Color.RGBtoHSB(0, 112, 222, null);
                                 profileButton.setBackground(Color.getHSBColor(colorShaman[0], colorShaman[1], colorShaman[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 8:
                                 JLabel picLabelMage = new JLabel(new ImageIcon("images/mage.png"));
                                 profileButton.add(picLabelMage, BorderLayout.WEST);
                                 float[] colorMage = Color.RGBtoHSB(105, 204, 240, null);
                                 profileButton.setBackground(Color.getHSBColor(colorMage[0], colorMage[1], colorMage[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 9:
                                 JLabel picLabelWarlock = new JLabel(new ImageIcon("images/warlock.png"));
                                 profileButton.add(picLabelWarlock, BorderLayout.WEST);
                                 float[] colorWarlock = Color.RGBtoHSB(148, 130, 201, null);
                                 profileButton.setBackground(Color.getHSBColor(colorWarlock[0], colorWarlock[1], colorWarlock[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 10:
                                 JLabel picLabelMonk = new JLabel(new ImageIcon("images/monk.png"));
                                 profileButton.add(picLabelMonk, BorderLayout.WEST);
                                 float[] colorMonk = Color.RGBtoHSB(0, 255, 150, null);
                                 profileButton.setBackground(Color.getHSBColor(colorMonk[0], colorMonk[1], colorMonk[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                             case 11:
                                 JLabel picLabelDruid = new JLabel(new ImageIcon("images/druid.png"));
                                 profileButton.add(picLabelDruid, BorderLayout.WEST);
                                 float[] colorDruid = Color.RGBtoHSB(255, 125, 10, null);
                                 profileButton.setBackground(Color.getHSBColor(colorDruid[0], colorDruid[1], colorDruid[2]));
-                                //button.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3, 500, 10, true));
                                 break;
                         }
                     } catch (Exception e1) {
@@ -320,7 +312,16 @@ public class MainFrame{
                             characters.remove(nameDummy); // Remove character from duplicate check
                             itemLevel.remove(nameDummy); // Remove character from average item level hashmap
                             groupPanel.avgItemLevelGroup(itemLevel);
+                            groupPanel.tierUsers(characters);
                             groupWindow.add(groupPanel, BorderLayout.CENTER);
+                            // If charWindow is currently showing info about the
+                            // character about to be deleted, clear the window
+                            if (charWindow.getComponentCount() != 0) {
+                                if (nameDummy.equals(charWindow.getComponent(0)
+                                        .getName())) {
+                                    charWindow.removeAll();
+                                }
+                            }
                             listPanel.remove(profileButton);
                             frame.validate();
                             frame.repaint();
@@ -332,23 +333,24 @@ public class MainFrame{
                     frame.validate();
                     frame.repaint();
 
-                    // Success popup
-                    JOptionPane.showMessageDialog(null, "Player successfully added!", "Success!", JOptionPane.INFORMATION_MESSAGE, new ImageIcon("images/success.png"));
-
                     // Implement action for profileButton
                     profileButton.addMouseListener(new MouseInputAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            final CharacterPanel characterPanel = new CharacterPanel();
+                            final CharacterPanel characterPanel = new CharacterPanel(
+                                    nameDummy);
 
                             // Read from wow api
                             characterPanel.getURL(player, realm);
-                            // Call methods to retrieve information from api and add the information as labels to charWindow
+                            // Call methods to retrieve information from api and
+                            // add the information as labels to charWindow
                             characterPanel.getCharacterName();
                             characterPanel.getLevel();
                             characterPanel.getCharacterClass();
                             characterPanel.getProfessions();
                             characterPanel.getItemLevel();
+                            characterPanel.getAchievementPoints();
+                            characterPanel.checkGems();
                             charWindow.removeAll();
                             charWindow.add(characterPanel, BorderLayout.CENTER);
                             frame.validate();
@@ -356,7 +358,9 @@ public class MainFrame{
                         }
                     });
                 } else {
-                    JOptionPane.showMessageDialog(null, "Please make sure that the name and realm are correct and that there are no duplicates", "Character or realm not found", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please make sure that the name and realm are correct and that there are no duplicates",
+                    "Character or realm not found",
+                    JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
