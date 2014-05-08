@@ -16,18 +16,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -46,14 +35,12 @@ import org.json.JSONObject;
  * information about the profiles in relation to eachother. Created by Jacke on
  * 2014-04-29.
  */
-public class MainFrame {
+public class MainFrame{
     private static HashMap<String, String> characters = new HashMap<String, String>();
     private static HashMap<String, Integer> itemLevel = new HashMap<String, Integer>();
-
     public MainFrame() {
     }
-
-    // Use Nimbus and default UI
+    // Use Nimbus as default UI
     public static void main(String[] args) {
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -63,6 +50,7 @@ public class MainFrame {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         // Initialize panels
         final RealmList realmList = new RealmList();
@@ -72,6 +60,7 @@ public class MainFrame {
         final JPanel listPanel = new JPanel();
         final JPanel charWindow = new JPanel();
         final JPanel groupWindow = new JPanel();
+        final JProgressBar progressBar = new JProgressBar();
 
         // Add a menu bar
         final JMenuBar menu = new JMenuBar();
@@ -115,6 +104,7 @@ public class MainFrame {
         topPanel.add(realms);
         topPanel.add(addCharacterButton);
         topPanel.add(rFileButton);
+        topPanel.add(progressBar);
         bottomPanel.add(charWindow);
         bottomPanel.add(groupWindow);
         menu.add(menuItem);
@@ -147,13 +137,15 @@ public class MainFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TextReader tr = new TextReader();
-
+                progressBar.setVisible(true);
+                progressBar.setIndeterminate(true);
                 try {
                     tr.search(characters, groupPanel, itemLevel, groupWindow, listPanel, charWindow, frame);
                 } catch (IOException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
+                progressBar.setVisible(false);
 
             }
         });
@@ -355,8 +347,7 @@ public class MainFrame {
                             characterPanel.checkGems();
                             try {
 								characterPanel.getArmoryLink(player, realm);
-							} catch (URISyntaxException e1) {
-								// TODO Auto-generated catch block
+							} catch (URISyntaxException e1){
 								e1.printStackTrace();
 							}
                             charWindow.removeAll();
@@ -375,7 +366,7 @@ public class MainFrame {
         // Modify basic settings for the main frame.
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(660, 630);
+        frame.setSize(800, 660);
         frame.setResizable(true);
         frame.setLocation(350, 50);
         frame.setVisible(true);

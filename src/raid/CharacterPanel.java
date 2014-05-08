@@ -70,6 +70,7 @@ public class CharacterPanel extends JPanel {
             in.close();
             obj = new JSONObject(json);
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return obj;
     }
@@ -164,45 +165,47 @@ public class CharacterPanel extends JPanel {
         }
     }
     
-    public void getArmoryLink(String character, String realm) throws URISyntaxException {
+    public void getArmoryLink(String character, String realm) throws URISyntaxException{
         String characterName = character;
         String realmName = realm.replaceAll(" ", "-");
-    	final URI uri = new URI("http://eu.battle.net/wow/en/character/" + realmName + "/" + characterName + "/advanced");
-    	final JLabel label = new JLabel();
-        label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
-        label.setToolTipText(uri.toString());
-    	class OpenUrlAction implements MouseListener {
-    	      @Override public void mouseClicked(MouseEvent e) {
-    	        open(uri);
-    	      }
+            final URI uri = new URI("http://eu.battle.net/wow/en/character/" + realmName + "/" + characterName + "/advanced");
+            final JLabel label = new JLabel();
+            label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
+            label.setToolTipText(uri.toString());
+            class OpenUrlAction implements MouseListener {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    open(uri);
+                }
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\"><U>Armory link</U></FONT></HTML>");
-				setCursor(new Cursor(Cursor.HAND_CURSOR));
-			}
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\"><U>Armory link</U></FONT></HTML>");
+                    setCursor(new Cursor(Cursor.HAND_CURSOR));
+                }
 
-			@Override
-			public void mouseExited(MouseEvent e) {
-				label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
-				setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			}
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
+                    setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                }
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    // TODO Auto-generated method stub
 
-			}
+                }
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    // TODO Auto-generated method stub
 
-			}
-    	    }
-    	label.addMouseListener(new OpenUrlAction());
-    	label.setFont(new Font("times new roman", Font.PLAIN, 11));
-        add(label);
+                }
+            }
+
+            label.addMouseListener(new OpenUrlAction());
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(label);
     }
     
     private static void open(URI uri) {
@@ -232,15 +235,6 @@ public class CharacterPanel extends JPanel {
     public String iLvlEquipped(){
         try {
             return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String realm(){
-        try {
-            return object.get("realm").toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -327,7 +321,9 @@ public class CharacterPanel extends JPanel {
                        hasSockets.add(true);
                    }else{
                        hasSockets.add(false);
-                       unsocketedItems.add(pairs.getKey().toString());
+                       if(!unsocketedItems.contains(pairs.getKey().toString())) {
+                           unsocketedItems.add(pairs.getKey().toString());
+                       }
                    }
                }
            }catch(Exception e){

@@ -45,7 +45,8 @@ public class TextReader {
                        final JPanel listPanel,
                        final JPanel charWindow,
                        final JFrame frame)
-            throws IOException {BufferedReader file = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
+            throws IOException {
+        BufferedReader file = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "ISO-8859-1"));
         String line;
         while ((line = file.readLine()) != null) {
             if (line.matches("\\D*\\w*-\\w*\\s\\w*")) {
@@ -218,6 +219,11 @@ public class TextReader {
                             characterPanel.getProfessions();
                             characterPanel.getItemLevel();
                             characterPanel.checkGems();
+                            try {
+                                characterPanel.getArmoryLink(player, realm);
+                            } catch (Exception e1){
+                                e1.printStackTrace();
+                            }
                             charWindow.removeAll();
                             charWindow.add(characterPanel, BorderLayout.CENTER);
                             frame.validate();
