@@ -310,12 +310,8 @@ public class MainFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							groupPanel.removeAll();
-							characters.remove(nameDummy); // Remove character
-														  // from duplicate
-														  // check
-							itemLevel.remove(nameDummy);  // Remove character
-														  // from average item
-														  // level hashmap
+							characters.remove(nameDummy); // Remove character from duplicate check
+							itemLevel.remove(nameDummy);  // Remove character from average item level hashmap
 							groupPanel.avgItemLevelGroup(itemLevel);
 							groupPanel.tierUsers(characters);
 							groupWindow.add(groupPanel, BorderLayout.CENTER);

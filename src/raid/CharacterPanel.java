@@ -234,7 +234,15 @@ public class CharacterPanel extends JPanel {
             e.printStackTrace();
         }
         return null;
+    }
 
+    public String realm(){
+        try {
+            return object.get("realm").toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -350,56 +358,55 @@ public class CharacterPanel extends JPanel {
     /**
      * Add characters items as keys for the items ids to a hashmap
      */
-    private void fillItems(){
+    private void fillItems() {
         try {
-            if (object.getJSONObject("items").has("trinket1")){
+            if (object.getJSONObject("items").has("trinket1")) {
                 items.put("trinket1", object.getJSONObject("items").getJSONObject("trinket1").get("id").toString());
             }
-            if (object.getJSONObject("items").has("trinket2")){
+            if (object.getJSONObject("items").has("trinket2")) {
                 items.put("trinket2", object.getJSONObject("items").getJSONObject("trinket2").get("id").toString());
             }
-            if (object.getJSONObject("items").has("feet")){
+            if (object.getJSONObject("items").has("feet")) {
                 items.put("feet", object.getJSONObject("items").getJSONObject("feet").get("id").toString());
             }
-            if (object.getJSONObject("items").has("chest")){
+            if (object.getJSONObject("items").has("chest")) {
                 items.put("chest", object.getJSONObject("items").getJSONObject("chest").get("id").toString());
             }
-            if (object.getJSONObject("items").has("hands")){
+            if (object.getJSONObject("items").has("hands")) {
                 items.put("hands", object.getJSONObject("items").getJSONObject("hands").get("id").toString());
             }
-            if (object.getJSONObject("items").has("back")){
+            if (object.getJSONObject("items").has("back")) {
                 items.put("back", object.getJSONObject("items").getJSONObject("back").get("id").toString());
             }
-            if (object.getJSONObject("items").has("neck")){
+            if (object.getJSONObject("items").has("neck")) {
                 items.put("neck", object.getJSONObject("items").getJSONObject("neck").get("id").toString());
             }
-            if (object.getJSONObject("items").has("wrist")){
+            if (object.getJSONObject("items").has("wrist")) {
                 items.put("wrist", object.getJSONObject("items").getJSONObject("wrist").get("id").toString());
             }
-            if (object.getJSONObject("items").has("finger1")){
+            if (object.getJSONObject("items").has("finger1")) {
                 items.put("finger1", object.getJSONObject("items").getJSONObject("finger1").get("id").toString());
             }
-            if (object.getJSONObject("items").has("finger2")){
+            if (object.getJSONObject("items").has("finger2")) {
                 items.put("finger2", object.getJSONObject("items").getJSONObject("finger2").get("id").toString());
             }
-            if (object.getJSONObject("items").has("head")){
+            if (object.getJSONObject("items").has("head")) {
                 items.put("head", object.getJSONObject("items").getJSONObject("head").get("id").toString());
             }
-            if (object.getJSONObject("items").has("mainHand")){
+            if (object.getJSONObject("items").has("mainHand")) {
                 items.put("mainHand", object.getJSONObject("items").getJSONObject("mainHand").get("id").toString());
             }
-            if (object.getJSONObject("items").has("legs")){
+            if (object.getJSONObject("items").has("legs")) {
                 items.put("legs", object.getJSONObject("items").getJSONObject("legs").get("id").toString());
             }
-            if (object.getJSONObject("items").has("waist")){
+            if (object.getJSONObject("items").has("waist")) {
                 items.put("waist", object.getJSONObject("items").getJSONObject("waist").get("id").toString());
             }
-            if (object.getJSONObject("items").has("shoulder")){
+            if (object.getJSONObject("items").has("shoulder")) {
                 items.put("shoulder", object.getJSONObject("items").getJSONObject("shoulder").get("id").toString());
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-}
+    }
