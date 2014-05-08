@@ -200,6 +200,7 @@ public class CharacterPanel extends JPanel {
 			}
     	    }
     	label.addMouseListener(new OpenUrlAction());
+    	label.setFont(new Font("times new roman", Font.PLAIN, 11));
         add(label);
     }
     
