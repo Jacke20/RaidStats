@@ -26,7 +26,7 @@
       <file leaf-file-name="RaidAssister.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/raid/RaidAssister.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="374">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
               <caret line="3" column="110" selection-start-line="3" selection-start-column="110" selection-end-line="3" selection-end-column="110" />
               <folding />
             </state>
@@ -43,23 +43,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CharacterPanel.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CharacterPanel.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/raid/CharacterPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="3468">
-              <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainFrame.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/raid/MainFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17010309" vertical-offset="1209" max-vertical-offset="5508">
-              <caret line="75" column="60" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.371134" vertical-offset="315" max-vertical-offset="5882">
+              <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#650#666#0" expanded="true" />
+                <element signature="e#736#753#0" expanded="true" />
+                <element signature="e#8892#8901#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,8 +60,8 @@
       <file leaf-file-name="GroupPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/raid/GroupPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="697">
-              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+              <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -78,9 +70,34 @@
       <file leaf-file-name="TextReader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/raid/TextReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="12" max-vertical-offset="3587">
-              <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="681" max-vertical-offset="4097">
+              <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#10381#10382#0" expanded="true" />
+                <element signature="e#10480#10481#0" expanded="true" />
+                <element signature="e#10545#10546#0" expanded="true" />
+                <element signature="e#10642#10643#0" expanded="true" />
+                <element signature="e#10714#11999#0" expanded="true" />
+                <element signature="e#11976#11977#0" expanded="true" />
+                <element signature="e#12180#13158#0" expanded="true" />
+                <element signature="e#13135#13136#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainFrame.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/raid/MainFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4457" max-vertical-offset="6103">
+              <caret line="288" column="21" selection-start-line="288" selection-start-column="21" selection-end-line="288" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1606#1622#0" expanded="true" />
+                <element signature="e#1693#1710#0" expanded="true" />
+                <element signature="e#4169#4177#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,12 +122,12 @@
         <option value="$PROJECT_DIR$/src/raid/GroupInfo.java" />
         <option value="$PROJECT_DIR$/src/raid/PlayerProfile.java" />
         <option value="$PROJECT_DIR$/src/raid/PlayerPanel.java" />
-        <option value="$PROJECT_DIR$/src/raid/CharacterPanel.java" />
         <option value="$PROJECT_DIR$/src/raid/GroupPanel.java" />
         <option value="$PROJECT_DIR$/src/raid/RealmList.java" />
         <option value="$PROJECT_DIR$/src/raid/RaidAssister.java" />
         <option value="$PROJECT_DIR$/src/raid/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/raid/TextReader.java" />
+        <option value="$PROJECT_DIR$/src/raid/CharacterPanel.java" />
       </list>
     </option>
   </component>
@@ -146,6 +163,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -185,7 +203,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -481,7 +498,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -506,7 +523,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963397" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -560,7 +577,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/raid/RaidAssister.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="374">
           <caret line="3" column="110" selection-start-line="3" selection-start-column="110" selection-end-line="3" selection-end-column="110" />
           <folding />
         </state>
@@ -578,16 +595,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="3468">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/raid/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="5729">
-          <caret line="66" column="70" selection-start-line="66" selection-start-column="70" selection-end-line="66" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="6035">
+          <caret line="75" column="58" selection-start-line="75" selection-start-column="58" selection-end-line="75" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -604,7 +628,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3570" max-vertical-offset="4216">
           <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10381#10382#0" expanded="true" />
+            <element signature="e#10480#10481#0" expanded="true" />
+            <element signature="e#10545#10546#0" expanded="true" />
+            <element signature="e#10642#10643#0" expanded="true" />
+            <element signature="e#10714#11999#0" expanded="true" />
+            <element signature="e#11976#11977#0" expanded="true" />
+            <element signature="e#12180#13158#0" expanded="true" />
+            <element signature="e#13135#13136#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -628,7 +662,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="3468">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="5729">
+          <caret line="66" column="70" selection-start-line="66" selection-start-column="70" selection-end-line="66" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/GroupPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="697">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/TextReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3570" max-vertical-offset="4216">
+          <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10381#10382#0" expanded="true" />
+            <element signature="e#10480#10481#0" expanded="true" />
+            <element signature="e#10545#10546#0" expanded="true" />
+            <element signature="e#10642#10643#0" expanded="true" />
+            <element signature="e#10714#11999#0" expanded="true" />
+            <element signature="e#11976#11977#0" expanded="true" />
+            <element signature="e#12180#13158#0" expanded="true" />
+            <element signature="e#13135#13136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/RaidAssister.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+          <caret line="3" column="110" selection-start-line="3" selection-start-column="110" selection-end-line="3" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/RealmList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="2244">
+          <caret line="5" column="108" selection-start-line="5" selection-start-column="108" selection-end-line="5" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/CharacterPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="3468">
+          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -638,6 +743,9 @@
           <caret line="128" column="26" selection-start-line="128" selection-start-column="26" selection-end-line="128" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -672,6 +780,9 @@
           <caret line="93" column="64" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -688,7 +799,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="94" max-vertical-offset="3196">
           <caret line="40" column="42" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -704,7 +819,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="2346">
           <caret line="127" column="142" selection-start-line="127" selection-start-column="142" selection-end-line="127" selection-end-column="142" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -714,6 +833,9 @@
           <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -738,7 +860,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="2346">
           <caret line="127" column="142" selection-start-line="127" selection-start-column="142" selection-end-line="127" selection-end-column="142" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -748,6 +874,9 @@
           <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -764,7 +893,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="2346">
           <caret line="127" column="142" selection-start-line="127" selection-start-column="142" selection-end-line="127" selection-end-column="142" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -774,6 +907,9 @@
           <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -790,7 +926,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="2346">
           <caret line="127" column="142" selection-start-line="127" selection-start-column="142" selection-end-line="127" selection-end-column="142" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -800,6 +940,9 @@
           <caret line="38" column="66" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -818,6 +961,9 @@
           <caret line="56" column="62" selection-start-line="56" selection-start-column="62" selection-end-line="56" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -826,7 +972,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="2057">
           <caret line="32" column="82" selection-start-line="32" selection-start-column="82" selection-end-line="32" selection-end-column="82" />
-          <folding />
+          <folding>
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -844,6 +994,9 @@
           <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -884,18 +1037,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/raid/CharacterPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3230">
-          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/raid/RaidAssister.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <caret line="3" column="110" selection-start-line="3" selection-start-column="110" selection-end-line="3" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/TextReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="681" max-vertical-offset="4097">
+          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10381#10382#0" expanded="true" />
+            <element signature="e#10480#10481#0" expanded="true" />
+            <element signature="e#10545#10546#0" expanded="true" />
+            <element signature="e#10642#10643#0" expanded="true" />
+            <element signature="e#10714#11999#0" expanded="true" />
+            <element signature="e#11976#11977#0" expanded="true" />
+            <element signature="e#12180#13158#0" expanded="true" />
+            <element signature="e#13135#13136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/MainFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4457" max-vertical-offset="6103">
+          <caret line="288" column="21" selection-start-line="288" selection-start-column="21" selection-end-line="288" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1606#1622#0" expanded="true" />
+            <element signature="e#1693#1710#0" expanded="true" />
+            <element signature="e#4169#4177#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/raid/GroupPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+          <caret line="53" column="29" selection-start-line="53" selection-start-column="29" selection-end-line="53" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -908,28 +1092,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/raid/GroupPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/raid/CharacterPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/raid/TextReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2839" max-vertical-offset="3587">
-          <caret line="210" column="45" selection-start-line="210" selection-start-column="45" selection-end-line="210" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/raid/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17010309" vertical-offset="1209" max-vertical-offset="5508">
-          <caret line="75" column="60" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.371134" vertical-offset="315" max-vertical-offset="5882">
+          <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#650#666#0" expanded="true" />
+            <element signature="e#736#753#0" expanded="true" />
+            <element signature="e#8892#8901#0" expanded="true" />
           </folding>
         </state>
       </provider>
