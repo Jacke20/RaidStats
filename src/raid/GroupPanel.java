@@ -2,6 +2,7 @@ package raid;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -70,4 +71,45 @@ public class GroupPanel extends JPanel {
 			add(label2);
 		}
 	}
+
+    public void missingGems(ArrayList list){
+        if(list.isEmpty()){
+            // do nothing
+        }else {
+            String listPlayers = list.toString().replace("]", "");
+            listPlayers = listPlayers.replace("[", "");
+            JLabel label = new JLabel("Missing gems: " + listPlayers);
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(label);
+        }
+    }
+    public void missingEnchants(ArrayList list){
+        if(list.isEmpty()){
+            // do nothing
+        }else {
+            String listPlayers = list.toString().replace("]", "");
+            listPlayers = listPlayers.replace("[", "");
+            JLabel label = new JLabel("Missing enchants: " + listPlayers);
+            label.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(label);
+        }
+    }
+
+    public void roleCount(int tankCount, int healerCount, int dpsCount){
+        if(tankCount != 0) {
+            JLabel tankLabel = new JLabel("Tanks: " + tankCount);
+            tankLabel.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(tankLabel);
+        }
+        if (healerCount != 0) {
+            JLabel healerLabel = new JLabel("Healers: " + healerCount);
+            healerLabel.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(healerLabel);
+        }
+        if(dpsCount != 0) {
+            JLabel dpsLabel = new JLabel("Dps: " + dpsCount);
+            dpsLabel.setFont(new Font("times new roman", Font.PLAIN, 11));
+            add(dpsLabel);
+        }
+    }
 }

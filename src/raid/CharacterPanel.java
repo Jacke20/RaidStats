@@ -23,10 +23,13 @@ import javax.swing.border.TitledBorder;
  */
 public class CharacterPanel extends JPanel {
     private JSONObject object;
-    private JSONObject obj;
+    private JSONObject itemObject;
+    private JSONObject charObject;
+    private JSONObject talentsObject;
     private HashMap<String, String> items = new HashMap<String, String>();
     private HashMap<String, Integer> numberOfSockets = new HashMap<String, Integer>();
     private ArrayList<String> unsocketedItems = new ArrayList<String>();
+
     public CharacterPanel(String name) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setPreferredSize(new Dimension(300, 200));
@@ -68,12 +71,55 @@ public class CharacterPanel extends JPanel {
                 json = inputLine + json;
             }
             in.close();
-            obj = new JSONObject(json);
+            itemObject = new JSONObject(json);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return obj;
+        return itemObject;
     }
+
+    public JSONObject getAuditAPI(String character, String realm) {
+        String characterName = character;
+        String realmName = realm.replaceAll(" ", "%20");
+        try {
+            URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + characterName + "?fields=audit");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(profile.openStream(), "UTF-8"));
+
+            String inputLine;
+            String json = "";
+            while ((inputLine = in.readLine()) != null) {
+                json = inputLine + json;
+            }
+            in.close();
+            charObject = new JSONObject(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return charObject;
+    }
+
+    public JSONObject getTalentsAPI(String character, String realm) {
+        String characterName = character;
+        String realmName = realm.replaceAll(" ", "%20");
+        try {
+            URL profile = new URL("http://eu.battle.net/api/wow/character/" + realmName + "/" + characterName + "?fields=talents");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(profile.openStream(), "UTF-8"));
+
+            String inputLine;
+            String json = "";
+            while ((inputLine = in.readLine()) != null) {
+                json = inputLine + json;
+            }
+            in.close();
+            talentsObject = new JSONObject(json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return talentsObject;
+    }
+
 
     /**
      * Add characters name to JLabel.
@@ -155,67 +201,67 @@ public class CharacterPanel extends JPanel {
         }
     }
 
-    public void getAchievementPoints(){
-        try{
+    public void getAchievementPoints() {
+        try {
             JLabel label = new JLabel("Achievement points: " + object.get("achievementPoints"));
             label.setFont(new Font("times new roman", Font.PLAIN, 11));
             add(label);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public void getArmoryLink(String character, String realm) throws URISyntaxException{
+
+    public void getArmoryLink(String character, String realm) throws URISyntaxException {
         String characterName = character;
         String realmName = realm.replaceAll(" ", "-");
-            final URI uri = new URI("http://eu.battle.net/wow/en/character/" + realmName + "/" + characterName + "/advanced");
-            final JLabel label = new JLabel();
-            label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
-            label.setToolTipText(uri.toString());
-            class OpenUrlAction implements MouseListener {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    open(uri);
-                }
-
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                    label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\"><U>Armory link</U></FONT></HTML>");
-                    setCursor(new Cursor(Cursor.HAND_CURSOR));
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                    label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
-                    setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    // TODO Auto-generated method stub
-
-                }
-
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    // TODO Auto-generated method stub
-
-                }
+        final URI uri = new URI("http://eu.battle.net/wow/en/character/" + realmName + "/" + characterName + "/advanced");
+        final JLabel label = new JLabel();
+        label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
+        label.setToolTipText(uri.toString());
+        class OpenUrlAction implements MouseListener {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                open(uri);
             }
 
-            label.addMouseListener(new OpenUrlAction());
-            label.setFont(new Font("times new roman", Font.PLAIN, 11));
-            add(label);
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\"><U>Armory link</U></FONT></HTML>");
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                label.setText("<HTML><FONT face =\"times new roman\" size = \"2.5\" color=\"#000099\">Armory link</FONT></HTML>");
+                setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+        }
+
+        label.addMouseListener(new OpenUrlAction());
+        label.setFont(new Font("times new roman", Font.PLAIN, 11));
+        add(label);
     }
-    
+
     private static void open(URI uri) {
         if (Desktop.isDesktopSupported()) {
-          try {
-            Desktop.getDesktop().browse(uri);
-          } catch (IOException e) { /* TODO: error handling */ }
+            try {
+                Desktop.getDesktop().browse(uri);
+            } catch (IOException e) { /* TODO: error handling */ }
         } else { /* TODO: error handling */ }
-      }
-    
+    }
+
     /**
      * Get characters item level.
      */
@@ -232,7 +278,7 @@ public class CharacterPanel extends JPanel {
     /**
      * Get characters item level equipped.
      */
-    public String iLvlEquipped(){
+    public String iLvlEquipped() {
         try {
             return object.getJSONObject("items").get("averageItemLevelEquipped").toString();
         } catch (JSONException e) {
@@ -244,7 +290,7 @@ public class CharacterPanel extends JPanel {
     /**
      * Get character name.
      */
-    public String name(){
+    public String name() {
         try {
             return object.get("name").toString();
         } catch (JSONException e) {
@@ -258,7 +304,7 @@ public class CharacterPanel extends JPanel {
      * Get characters class. Values below are numbers that correspond to specified class in JSONObject.
      * 1 = Warrior, 2 = Paladin, 3 = Hunter, 4 = Rogue, 5 = Priest, 6 = Death Knight, 7 = Shaman, , 8 = Mage, 9 = Warlock, 10 = Monk, 11 = Druid
      */
-    public String wowClass(){
+    public String wowClass() {
         try {
             HashMap<Integer, String> classMap = new HashMap<Integer, String>();
             classMap.put(1, "Warrior");
@@ -284,17 +330,19 @@ public class CharacterPanel extends JPanel {
      * Check if the arraylist returned from getSocketsArray() is filled with true only.
      * If it is, character if fully gemmed, else the character is not fully gemmed.
      */
-    public void checkGems(){
+    public void checkGems() {
         fillItems();
         getNumberOfSockets();
         ArrayList list = getSocketsArray();
-        for (int i = 0; i < list.size(); i++){
+        String listPlayers = unsocketedItems.toString().replace("]", "");
+        listPlayers = listPlayers.replace("[", "");
+        for (int i = 0; i < list.size(); i++) {
             boolean hasGem = ((Boolean) list.get(i)).booleanValue();
-            if (!hasGem){
+            if (!hasGem) {
                 JLabel label = new JLabel("Fully gemmed: No");
                 label.setFont(new Font("times new roman", Font.PLAIN, 11));
                 add(label);
-                JLabel label2 = new JLabel("Unsocketed items: " + unsocketedItems);
+                JLabel label2 = new JLabel("Unsocketed items: " + listPlayers);
                 label2.setFont(new Font("times new roman", Font.PLAIN, 11));
                 add(label2);
                 return;
@@ -308,29 +356,30 @@ public class CharacterPanel extends JPanel {
     /**
      * Go through the gem slots for each of the characters items if there are any and fill an arraylist with true if the
      * slots are filled, else fill it with false.
+     *
      * @return the arraylist that holds true or false values
      */
-   private ArrayList getSocketsArray(){
-       Iterator it = numberOfSockets.entrySet().iterator();
-       ArrayList <Boolean> hasSockets = new ArrayList<Boolean>();
-       while (it.hasNext()) {
-           Map.Entry pairs = (Map.Entry) it.next();
-           try {
-               for(int i = 0; i < Integer.parseInt(pairs.getValue().toString()); i ++){ // Go through each gem slot
-                   if(object.getJSONObject("items").getJSONObject(pairs.getKey().toString()).getJSONObject("tooltipParams").has("gem" + i)){ // Check if there is a gem
-                       hasSockets.add(true);
-                   }else{
-                       hasSockets.add(false);
-                       if(!unsocketedItems.contains(pairs.getKey().toString())) {
-                           unsocketedItems.add(pairs.getKey().toString());
-                       }
-                   }
-               }
-           }catch(Exception e){
-               e.printStackTrace();
-           }
-       }
-       return hasSockets;
+    private ArrayList getSocketsArray() {
+        Iterator it = numberOfSockets.entrySet().iterator();
+        ArrayList<Boolean> hasSockets = new ArrayList<Boolean>();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry) it.next();
+            try {
+                for (int i = 0; i < Integer.parseInt(pairs.getValue().toString()); i++) { // Go through each gem slot
+                    if (object.getJSONObject("items").getJSONObject(pairs.getKey().toString()).getJSONObject("tooltipParams").has("gem" + i)) { // Check if there is a gem
+                        hasSockets.add(true);
+                    } else {
+                        hasSockets.add(false);
+                        if (!unsocketedItems.contains(pairs.getKey().toString())) {
+                            unsocketedItems.add(pairs.getKey().toString());
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return hasSockets;
     }
 
     /**
@@ -342,19 +391,19 @@ public class CharacterPanel extends JPanel {
             int socketCounter = 0;
             Map.Entry pairs = (Map.Entry) it.next();
             try {
-                obj = getItemAPI(pairs.getValue().toString());
-                if (obj.getBoolean("hasSockets")){
-                for (int i = 0; i < 4; i++) {
-                     if(!obj.getJSONObject("socketInfo").getJSONArray("sockets").isNull(i)) {
-                        socketCounter ++;
+                itemObject = getItemAPI(pairs.getValue().toString());
+                if (itemObject.getBoolean("hasSockets")) {
+                    for (int i = 0; i < 4; i++) {
+                        if (!itemObject.getJSONObject("socketInfo").getJSONArray("sockets").isNull(i)) {
+                            socketCounter++;
+                        }
                     }
+                    numberOfSockets.put(pairs.getKey().toString(), socketCounter);
                 }
-                numberOfSockets.put(pairs.getKey().toString(), socketCounter);
-                }
-        }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
+            }
         }
-    }
     }
 
     /**
@@ -411,4 +460,52 @@ public class CharacterPanel extends JPanel {
             e.printStackTrace();
         }
     }
+
+    public void enchanted() {
+        try {
+            if (charObject.getJSONObject("audit").getJSONObject("unenchantedItems").length() == 0) {
+                JLabel label = new JLabel("Fully enchanted: Yes");
+                label.setFont(new Font("times new roman", Font.PLAIN, 11));
+                add(label);
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JLabel label = new JLabel("Fully enchanted: No");
+        label.setFont(new Font("times new roman", Font.PLAIN, 11));
+        add(label);
     }
+
+    public boolean missingEnchants() {
+        try {
+            if (charObject.getJSONObject("audit").getJSONObject("unenchantedItems").length() == 0) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean missingGems() {
+        try {
+            if (charObject.getJSONObject("audit").get("emptySockets").toString().equals("0")) {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public String getRole(){
+        try{
+            String talents = talentsObject.getJSONArray("talents").getJSONObject(0).getJSONObject("spec").get("role").toString();
+            return talents;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+}
